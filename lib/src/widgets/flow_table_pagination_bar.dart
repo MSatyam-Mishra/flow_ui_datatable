@@ -26,9 +26,9 @@ class FlowTablePaginationBar extends StatelessWidget {
         border: Border(
           top: BorderSide(color: borderColor),
         ),
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(7),
-          bottomRight: Radius.circular(7),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(theme.borderRadius),
+          bottomRight: Radius.circular(theme.borderRadius),
         ),
       ),
       child: Row(

@@ -326,11 +326,14 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
         borderColor,
         cellBgColor,
         computedMinWidth,
-        widget.loadingWidget ??
-            SizedBox(
-              height: theme.rowHeight * 4,
-              child: const Center(child: CircularProgressIndicator()),
-            ),
+        _clipAllCorners(
+          theme,
+          widget.loadingWidget ??
+              SizedBox(
+                height: theme.rowHeight * 4,
+                child: const Center(child: CircularProgressIndicator()),
+              ),
+        ),
       );
     }
 
@@ -341,75 +344,109 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
         borderColor,
         cellBgColor,
         computedMinWidth,
-        widget.emptyWidget ??
-            SizedBox(
-              height: theme.rowHeight * 3,
-              child: Center(
-                child: Text(
-                  'No data available',
-                  style: theme.bodyStyle(context).copyWith(
-                        color: theme.secondaryTextColor(context),
-                      ),
+        _clipAllCorners(
+          theme,
+          widget.emptyWidget ??
+              SizedBox(
+                height: theme.rowHeight * 3,
+                child: Center(
+                  child: Text(
+                    'No data available',
+                    style: theme.bodyStyle(context).copyWith(
+                          color: theme.secondaryTextColor(context),
+                        ),
+                  ),
                 ),
               ),
-            ),
+        ),
       );
     }
 
     final paginationStart = widget.pagination?.startIndex ?? 0;
+    final columnWidths = _buildColumnWidths();
+    final verticalBorder = BorderSide(color: borderColor, width: 1);
 
-    final table = Table(
+    final dataRows = displayRows.asMap().entries.map((entry) {
+      final visibleIndex = entry.key;
+      final row = entry.value;
+      final globalIndex = widget.clientSidePagination
+          ? paginationStart + visibleIndex
+          : widget.rows.indexOf(row);
+
+      return _buildDataRow(
+        context,
+        theme: theme,
+        brightness: brightness,
+        row: row,
+        globalIndex: globalIndex,
+        visibleIndex: visibleIndex,
+        indexBgColor: indexBgColor,
+      );
+    }).toList();
+
+    final topRadius = BorderRadius.only(
+      topLeft: Radius.circular(theme.borderRadius),
+      topRight: Radius.circular(theme.borderRadius),
+    );
+
+    final bottomRadius = BorderRadius.only(
+      bottomLeft: Radius.circular(theme.borderRadius),
+      bottomRight: Radius.circular(theme.borderRadius),
+    );
+
+    Widget bodyTable = Table(
+      columnWidths: columnWidths,
       border: TableBorder(
-        horizontalInside: BorderSide(color: borderColor, width: 1),
-        verticalInside: BorderSide(color: borderColor, width: 1),
+        horizontalInside: verticalBorder,
+        verticalInside: verticalBorder,
       ),
-      columnWidths: _buildColumnWidths(),
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+      children: dataRows,
+    );
+
+    if (widget.pagination == null) {
+      bodyTable = ClipRRect(
+        borderRadius: bottomRadius,
+        clipBehavior: Clip.antiAlias,
+        child: bodyTable,
+      );
+    }
+
+    Widget tableContent = Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _buildHeaderRow(
-          context,
-          theme,
-          headerBgColor,
-          displayRows,
-          paginationStart,
+        Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            color: headerBgColor,
+            borderRadius: topRadius,
+          ),
+          child: Table(
+            columnWidths: columnWidths,
+            border: TableBorder(
+              verticalInside: verticalBorder,
+              bottom: verticalBorder,
+            ),
+            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+            children: [
+              _buildHeaderRow(
+                context,
+                theme,
+                displayRows,
+                paginationStart,
+              ),
+            ],
+          ),
         ),
-        ...displayRows.asMap().entries.map((entry) {
-          final visibleIndex = entry.key;
-          final row = entry.value;
-          final globalIndex = widget.clientSidePagination
-              ? paginationStart + visibleIndex
-              : widget.rows.indexOf(row);
-
-          return _buildDataRow(
-            context,
-            theme: theme,
-            brightness: brightness,
-            row: row,
-            globalIndex: globalIndex,
-            visibleIndex: visibleIndex,
-            indexBgColor: indexBgColor,
-          );
-        }),
-      ],
-    );
-
-    Widget tableContent = ClipRRect(
-      borderRadius: BorderRadius.circular(theme.borderRadius - 1),
-      child: table,
-    );
-
-    if (widget.pagination != null) {
-      tableContent = Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          table,
+        bodyTable,
+        if (widget.pagination != null)
           FlowTablePaginationBar(
             pagination: widget.pagination!,
             theme: theme,
           ),
-        ],
-      );
-    }
+      ],
+    );
 
     return _wrapTableShell(
       context,
@@ -462,10 +499,16 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
     );
   }
 
+  Widget _clipAllCorners(FlowTableTheme theme, Widget child) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(theme.borderRadius),
+      child: child,
+    );
+  }
+
   TableRow _buildHeaderRow(
     BuildContext context,
     FlowTableTheme theme,
-    Color headerBgColor,
     List<T> visibleRows,
     int paginationStart,
   ) {
@@ -542,10 +585,7 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
       );
     }
 
-    return TableRow(
-      decoration: BoxDecoration(color: headerBgColor),
-      children: cells,
-    );
+    return TableRow(children: cells);
   }
 
   TableRow _buildDataRow(
