@@ -7,6 +7,7 @@ import '../models/flow_pagination.dart';
 import '../models/flow_table_sort.dart';
 import '../theme/flow_table_theme.dart';
 import 'flow_interactive_cell.dart';
+import 'flow_rounded_checkbox.dart';
 import 'flow_table_pagination_bar.dart';
 
 typedef FlowRowIdGetter<T> = String Function(T row, int index);
@@ -516,11 +517,18 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
     final cells = <Widget>[];
 
     if (widget.selectable) {
-      final allSelected = visibleRows.isNotEmpty &&
-          visibleRows.every((row) {
-            final i = widget.rows.indexOf(row);
-            return widget.selectedRowIds.contains(_rowId(row, i));
-          });
+      final selectedCount = visibleRows.where((row) {
+        final i = widget.rows.indexOf(row);
+        return widget.selectedRowIds.contains(_rowId(row, i));
+      }).length;
+
+      final bool? headerValue = visibleRows.isEmpty
+          ? false
+          : selectedCount == 0
+              ? false
+              : selectedCount == visibleRows.length
+                  ? true
+                  : null;
 
       cells.add(
         _buildHeaderCell(
@@ -529,9 +537,8 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
           '',
           isDark,
           center: true,
-          child: Checkbox(
-            value: allSelected,
-            tristate: true,
+          child: FlowRoundedCheckbox(
+            value: headerValue,
             onChanged: widget.onSelectionChanged == null
                 ? null
                 : (_) => _toggleSelectAll(visibleRows, paginationStart),
@@ -615,7 +622,7 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
           onTap: widget.onSelectionChanged == null
               ? null
               : () => _toggleRowSelection(row, globalIndex),
-          child: Checkbox(
+          child: FlowRoundedCheckbox(
             value: isSelected,
             onChanged: widget.onSelectionChanged == null
                 ? null
