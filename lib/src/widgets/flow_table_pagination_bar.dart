@@ -33,14 +33,17 @@ class FlowTablePaginationBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Text(
-            'Showing ${pagination.startIndex + 1}-${pagination.endIndex} of ${pagination.totalItems}',
-            style: theme.bodyStyle(context).copyWith(
-                  fontSize: 12,
-                  color: theme.secondaryTextColor(context),
-                ),
+          Flexible(
+            child: Text(
+              'Showing ${pagination.startIndex + 1}-${pagination.endIndex} of ${pagination.totalItems}',
+              overflow: TextOverflow.ellipsis,
+              style: theme.bodyStyle(context).copyWith(
+                    fontSize: 12,
+                    color: theme.secondaryTextColor(context),
+                  ),
+            ),
           ),
-          const Spacer(),
+          const SizedBox(width: 12),
           if (pagination.showPageSizeSelector &&
               pagination.onPageSizeChanged != null) ...[
             Text(
@@ -50,7 +53,7 @@ class FlowTablePaginationBar extends StatelessWidget {
             const SizedBox(width: 8),
             _PageSizeDropdown(
               value: pagination.pageSize,
-              options: pagination.pageSizeOptions,
+              options: pagination.effectivePageSizeOptions,
               onChanged: pagination.onPageSizeChanged!,
               theme: theme,
             ),

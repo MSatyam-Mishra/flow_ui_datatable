@@ -70,6 +70,53 @@ void main() {
       expect(toggled.direction, FlowSortDirection.descending);
       expect(toggled.toggle().direction, FlowSortDirection.ascending);
     });
+
+    test('FlowPagination includes current pageSize in dropdown options', () {
+      const pagination = FlowPagination(
+        currentPage: 1,
+        pageSize: 5,
+        totalItems: 12,
+      );
+
+      expect(pagination.effectivePageSizeOptions, [5, 10, 25, 50, 100]);
+    });
+
+    testWidgets('pagination dropdown accepts custom pageSize', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: FlowDataTable<_TestRow>(
+              rows: List.generate(
+                12,
+                (i) => _TestRow(
+                  id: '$i',
+                  name: 'User $i',
+                  status: 'Active',
+                ),
+              ),
+              pagination: FlowPagination(
+                currentPage: 1,
+                pageSize: 5,
+                totalItems: 12,
+                onPageChanged: (_) {},
+                onPageSizeChanged: (_) {},
+              ),
+              columns: [
+                FlowColumn(
+                  id: 'name',
+                  label: 'Name',
+                  cellBuilder: (context, row, _) =>
+                      FlowCells.text(context, row.name),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('5'), findsWidgets);
+      expect(tester.takeException(), isNull);
+    });
   });
 }
 

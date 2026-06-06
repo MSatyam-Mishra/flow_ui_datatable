@@ -34,11 +34,17 @@ FlowDataTable<DemoUser>(
     ),
     FlowColumn(
       id: 'role',
-      label: 'Role',
+      label: 'System Role',
       icon: LucideIcons.shield,
+      width: const FlowFixedColumnWidth(130),
       sortable: true,
-      sortValue: (u) => u.role,
-      cellBuilder: (ctx, user, _) => FlowCells.text(ctx, user.role),
+      sortValue: (u) => roleFor(u),
+      cellBuilder: (ctx, user, _) => FlowCells.dropdown(
+        ctx,
+        value: roleFor(user),
+        options: const ['Admin', 'Member', 'Owner', 'Viewer'],
+        onChanged: (role) => updateRole(user.id, role),
+      ),
     ),
     FlowColumn(
       id: 'status',
@@ -53,14 +59,14 @@ FlowDataTable<DemoUser>(
 const minimalTableCode = '''
 FlowDataTable<DemoUser>(
   rows: users,
-  minTableWidth: 700,
+  minTableWidth: 720,
   // No selectable, no showRowIndex, no actions
   columns: [
     FlowColumn(
       id: 'name',
       label: 'Name',
       icon: LucideIcons.user,
-      width: const FlowFlexColumnWidth(2),
+      width: const FlowFlexColumnWidth(1.2),
       sortable: true,
       sortValue: (u) => u.name,
       cellBuilder: (ctx, user, _) => FlowCells.text(

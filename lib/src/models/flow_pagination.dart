@@ -25,4 +25,10 @@ class FlowPagination {
   int get endIndex => (startIndex + pageSize).clamp(0, totalItems);
   bool get hasPrevious => currentPage > 1;
   bool get hasNext => currentPage < totalPages;
+
+  /// Ensures [pageSize] is present for [DropdownButton] validation.
+  List<int> get effectivePageSizeOptions {
+    final options = {...pageSizeOptions, pageSize}.toList()..sort();
+    return options;
+  }
 }

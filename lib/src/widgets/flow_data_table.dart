@@ -339,27 +339,74 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
     }
 
     if (widget.rows.isEmpty) {
+      final columnWidths = _buildColumnWidths();
+      final verticalBorder = BorderSide(color: borderColor, width: 1);
+      final topRadius = BorderRadius.only(
+        topLeft: Radius.circular(theme.borderRadius),
+        topRight: Radius.circular(theme.borderRadius),
+      );
+      final bottomRadius = BorderRadius.only(
+        bottomLeft: Radius.circular(theme.borderRadius),
+        bottomRight: Radius.circular(theme.borderRadius),
+      );
+
+      final emptyContent = Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              color: headerBgColor,
+              borderRadius: topRadius,
+            ),
+            child: Table(
+              columnWidths: columnWidths,
+              border: TableBorder(
+                verticalInside: verticalBorder,
+                bottom: verticalBorder,
+              ),
+              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+              children: [
+                _buildHeaderRow(
+                  context,
+                  theme,
+                  const [],
+                  0,
+                ),
+              ],
+            ),
+          ),
+          ClipRRect(
+            borderRadius: bottomRadius,
+            clipBehavior: Clip.antiAlias,
+            child: Container(
+              width: double.infinity,
+              color: cellBgColor,
+              child: widget.emptyWidget ??
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 32),
+                    child: Center(
+                      child: Text(
+                        'No data available',
+                        style: theme.bodyStyle(context).copyWith(
+                              color: theme.secondaryTextColor(context),
+                            ),
+                      ),
+                    ),
+                  ),
+            ),
+          ),
+        ],
+      );
+
       return _wrapTableShell(
         context,
         theme,
         borderColor,
         cellBgColor,
         computedMinWidth,
-        _clipAllCorners(
-          theme,
-          widget.emptyWidget ??
-              SizedBox(
-                height: theme.rowHeight * 3,
-                child: Center(
-                  child: Text(
-                    'No data available',
-                    style: theme.bodyStyle(context).copyWith(
-                          color: theme.secondaryTextColor(context),
-                        ),
-                  ),
-                ),
-              ),
-        ),
+        emptyContent,
       );
     }
 

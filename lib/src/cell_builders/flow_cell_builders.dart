@@ -3,6 +3,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../theme/flow_table_theme.dart';
 import '../widgets/flow_avatar.dart';
+import '../widgets/flow_dropdown_cell.dart';
 import '../widgets/flow_status_badge.dart';
 
 /// Pre-built cell widgets that preserve the original table look and feel.
@@ -147,6 +148,24 @@ abstract final class FlowCells {
           ),
         ),
       ],
+    );
+  }
+
+  /// Surface-style inline dropdown cell (e.g. editable role per row).
+  static Widget dropdown(
+    BuildContext context, {
+    required String value,
+    required List<String> options,
+    ValueChanged<String>? onChanged,
+    FlowTableTheme theme = FlowTableTheme.defaults,
+    IconData icon = LucideIcons.chevronDown,
+  }) {
+    return FlowDropdownCell(
+      value: value,
+      options: options,
+      onChanged: onChanged,
+      theme: theme,
+      icon: icon,
     );
   }
 

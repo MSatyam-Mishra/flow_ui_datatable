@@ -3,6 +3,7 @@ import 'package:flow_ui_datatable/flow_ui_datatable.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../data/demo_data.dart';
+import '../widgets/table_empty_state.dart';
 
 class TeamDirectoryPreview extends StatefulWidget {
   const TeamDirectoryPreview({super.key});
@@ -13,8 +14,13 @@ class TeamDirectoryPreview extends StatefulWidget {
 
 class _TeamDirectoryPreviewState extends State<TeamDirectoryPreview> {
   final Set<String> _selectedIds = {};
+  final Map<String, String> _roleOverrides = {};
   int _page = 1;
   int _pageSize = 5;
+
+  static const _roleOptions = ['Admin', 'Member', 'Owner', 'Viewer'];
+
+  String _roleFor(DemoUser user) => _roleOverrides[user.id] ?? user.role;
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +46,32 @@ class _TeamDirectoryPreviewState extends State<TeamDirectoryPreview> {
         currentPage: _page,
         pageSize: _pageSize,
         totalItems: demoUsers.length,
+        pageSizeOptions: const [5, 10, 25, 50],
         onPageChanged: (p) => setState(() => _page = p),
         onPageSizeChanged: (s) => setState(() {
           _pageSize = s;
           _page = 1;
         }),
       ),
-      columns: _userColumns(full: true),
+      columns: [
+        _userInfoColumn(),
+        FlowColumn(
+          id: 'role',
+          label: 'System Role',
+          icon: LucideIcons.shield,
+          width: const FlowFixedColumnWidth(130),
+          sortable: true,
+          sortValue: (u) => _roleFor(u),
+          cellBuilder: (context, user, _) => FlowCells.dropdown(
+            context,
+            value: _roleFor(user),
+            options: _roleOptions,
+            onChanged: (role) => setState(() => _roleOverrides[user.id] = role),
+          ),
+        ),
+        _statusColumn(),
+        ..._userColumnsTail(),
+      ],
     );
   }
 }
@@ -58,13 +83,13 @@ class MinimalTablePreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlowDataTable<DemoUser>(
       rows: demoUsers,
-      minTableWidth: 700,
+      minTableWidth: 720,
       columns: [
         FlowColumn(
           id: 'name',
           label: 'Name',
           icon: LucideIcons.user,
-          width: const FlowFlexColumnWidth(2),
+          width: const FlowFlexColumnWidth(1.2),
           sortable: true,
           sortValue: (u) => u.name,
           cellBuilder: (context, user, _) =>
@@ -74,12 +99,14 @@ class MinimalTablePreview extends StatelessWidget {
           id: 'role',
           label: 'Role',
           icon: LucideIcons.shield,
+          width: const FlowFlexColumnWidth(1),
           cellBuilder: (context, user, _) => FlowCells.text(context, user.role),
         ),
         FlowColumn(
           id: 'status',
           label: 'Status',
           icon: LucideIcons.activity,
+          width: const FlowFixedColumnWidth(110),
           cellBuilder: (context, user, _) =>
               FlowCells.badge(context, user.status),
         ),
@@ -87,6 +114,7 @@ class MinimalTablePreview extends StatelessWidget {
           id: 'department',
           label: 'Department',
           icon: LucideIcons.briefcase,
+          width: const FlowFlexColumnWidth(1.4),
           cellBuilder: (context, user, _) =>
               FlowCells.text(context, user.department),
         ),
@@ -169,9 +197,10 @@ class ProductCatalogPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlowDataTable<DemoProduct>(
       rows: demoProducts,
-      minTableWidth: 900,
+      minTableWidth: 960,
       showRowIndex: true,
       rowIndexLabel: 'SKU',
+      rowIndexWidth: 108,
       rowIndexBuilder: (p, _) => p.id,
       showActionsColumn: true,
       actionsBuilder: (context, product, _) => FlowCells.actionsButton(
@@ -246,6 +275,7 @@ class OrderTrackerPreview extends StatelessWidget {
           id: 'order',
           label: 'Order ID',
           icon: LucideIcons.receipt,
+          width: const FlowFixedColumnWidth(112),
           cellBuilder: (context, o, _) => FlowCells.text(
             context,
             o.id,
@@ -373,29 +403,11 @@ class EmptyStatePreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlowDataTable<DemoUser>(
       rows: const [],
-      minTableWidth: 600,
-      emptyWidget: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            LucideIcons.inbox,
-            size: 40,
-            color: Colors.grey[400],
-          ),
-          const SizedBox(height: 12),
-          Text(
-            'No users found',
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              color: Colors.grey[600],
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'Try adjusting your filters',
-            style: TextStyle(color: Colors.grey[500], fontSize: 13),
-          ),
-        ],
+      minTableWidth: 640,
+      emptyWidget: const TableEmptyState(
+        title: 'No users found',
+        subtitle: 'Try adjusting your filters or invite new team members.',
+        icon: LucideIcons.users,
       ),
       columns: [
         FlowColumn(
@@ -415,9 +427,7 @@ class EmptyStatePreview extends StatelessWidget {
   }
 }
 
-List<FlowColumn<DemoUser>> _userColumns({required bool full}) {
-  final columns = <FlowColumn<DemoUser>>[
-    FlowColumn(
+FlowColumn<DemoUser> _userInfoColumn() => FlowColumn(
       id: 'user',
       label: 'User Info',
       icon: LucideIcons.user,
@@ -429,17 +439,9 @@ List<FlowColumn<DemoUser>> _userColumns({required bool full}) {
         title: user.name,
         subtitle: user.email,
       ),
-    ),
-    FlowColumn(
-      id: 'role',
-      label: 'Role',
-      icon: LucideIcons.shield,
-      sortable: true,
-      sortValue: (u) => u.role,
-      cellBuilder: (context, user, _) =>
-          FlowCells.text(context, user.role, fontWeight: FontWeight.w500),
-    ),
-    FlowColumn(
+    );
+
+FlowColumn<DemoUser> _statusColumn() => FlowColumn(
       id: 'status',
       label: 'Status',
       icon: LucideIcons.activity,
@@ -447,11 +449,9 @@ List<FlowColumn<DemoUser>> _userColumns({required bool full}) {
       sortValue: (u) => u.status,
       cellBuilder: (context, user, _) =>
           FlowCells.badge(context, user.status),
-    ),
-  ];
+    );
 
-  if (full) {
-    columns.addAll([
+List<FlowColumn<DemoUser>> _userColumnsTail() => [
       FlowColumn(
         id: 'department',
         label: 'Department',
@@ -482,11 +482,7 @@ List<FlowColumn<DemoUser>> _userColumns({required bool full}) {
           isActive: user.lastActive == 'Online',
         ),
       ),
-    ]);
-  }
-
-  return columns;
-}
+    ];
 
 void _snack(BuildContext context, String message) {
   ScaffoldMessenger.of(context).showSnackBar(

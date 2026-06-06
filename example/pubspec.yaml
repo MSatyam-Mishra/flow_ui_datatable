@@ -12,6 +12,7 @@ dependencies:
   flow_ui_datatable:
     path: ../
   lucide_icons_flutter: ^3.0.0
+  highlight: ^0.7.0
 
 dev_dependencies:
   flutter_test:

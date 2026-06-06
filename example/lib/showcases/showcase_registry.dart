@@ -9,8 +9,8 @@ final showcaseItems = [
     id: 'team',
     title: 'Team Directory',
     description:
-        'Full-featured table with rounded checkboxes, row index, sorting, '
-        'pagination, and row actions — ideal for admin dashboards.',
+        'Full-featured table with inline role dropdowns, rounded checkboxes, '
+        'row index, sorting, pagination, and row actions.',
     icon: LucideIcons.users,
     preview: const TeamDirectoryPreview(),
     code: teamDirectoryCode,
