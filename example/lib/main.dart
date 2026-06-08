@@ -3,6 +3,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import 'showcases/showcase_registry.dart';
 import 'widgets/showcase_shell.dart';
+
 //test
 void main() {
   runApp(const FlowDataTableDemoApp());
@@ -129,9 +130,10 @@ class _FlowDataTableDemoAppState extends State<FlowDataTableDemoApp> {
       extended: extended,
       minExtendedWidth: 220,
       selectedIndex: _selectedIndex,
-      onDestinationSelected: (index) =>
-          setState(() => _selectedIndex = index),
-      labelType: extended ? NavigationRailLabelType.none : NavigationRailLabelType.all,
+      onDestinationSelected: (index) => setState(() => _selectedIndex = index),
+      labelType: extended
+          ? NavigationRailLabelType.none
+          : NavigationRailLabelType.all,
       leading: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
         child: Text(

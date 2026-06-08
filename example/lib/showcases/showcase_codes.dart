@@ -43,6 +43,7 @@ FlowDataTable<DemoUser>(
         ctx,
         value: roleFor(user),
         options: const ['Admin', 'Member', 'Owner', 'Viewer'],
+        isPlain: true,
         onChanged: (role) => updateRole(user.id, role),
       ),
     ),

@@ -152,6 +152,9 @@ abstract final class FlowCells {
   }
 
   /// Surface-style inline dropdown cell (e.g. editable role per row).
+  ///
+  /// Set [isPlain] to true to render the dropdown cell without the button border,
+  /// background, or minimum width constraints (acting as plain text with a chevron down icon).
   static Widget dropdown(
     BuildContext context, {
     required String value,
@@ -159,6 +162,7 @@ abstract final class FlowCells {
     ValueChanged<String>? onChanged,
     FlowTableTheme theme = FlowTableTheme.defaults,
     IconData icon = LucideIcons.chevronDown,
+    bool isPlain = false,
   }) {
     return FlowDropdownCell(
       value: value,
@@ -166,6 +170,7 @@ abstract final class FlowCells {
       onChanged: onChanged,
       theme: theme,
       icon: icon,
+      isPlain: isPlain,
     );
   }
 

@@ -1,6 +1,6 @@
 {
-    "name": "web",
-    "short_name": "web",
+    "name": "flow_ui_datatable_example",
+    "short_name": "flow_ui_datatable_example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

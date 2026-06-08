@@ -66,6 +66,7 @@ class _TeamDirectoryPreviewState extends State<TeamDirectoryPreview> {
             context,
             value: _roleFor(user),
             options: _roleOptions,
+            isPlain: true,
             onChanged: (role) => setState(() => _roleOverrides[user.id] = role),
           ),
         ),

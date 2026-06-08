@@ -14,6 +14,7 @@ class FlowDropdownCell extends StatelessWidget {
     this.icon = LucideIcons.chevronDown,
     this.borderRadius = 6,
     this.isDense = true,
+    this.isPlain = false,
   });
 
   final String value;
@@ -23,6 +24,10 @@ class FlowDropdownCell extends StatelessWidget {
   final IconData icon;
   final double borderRadius;
   final bool isDense;
+
+  /// Whether to render the dropdown cell without the button border,
+  /// background, or minimum width constraints (acting as plain text with a chevron down icon).
+  final bool isPlain;
 
   @override
   Widget build(BuildContext context) {
@@ -62,20 +67,24 @@ class FlowDropdownCell extends StatelessWidget {
                 : null,
             borderRadius: BorderRadius.circular(borderRadius),
             child: Container(
-              constraints: const BoxConstraints(minWidth: 88),
-              padding: EdgeInsets.symmetric(
-                horizontal: isDense ? 8 : 10,
-                vertical: isDense ? 4 : 6,
-              ),
-              decoration: BoxDecoration(
-                color: surfaceColor,
-                borderRadius: BorderRadius.circular(borderRadius),
-                border: Border.all(
-                  color: enabled
-                      ? borderColor
-                      : borderColor.withValues(alpha: 0.6),
-                ),
-              ),
+              constraints: isPlain ? null : const BoxConstraints(minWidth: 88),
+              padding: isPlain
+                  ? EdgeInsets.zero
+                  : EdgeInsets.symmetric(
+                      horizontal: isDense ? 8 : 10,
+                      vertical: isDense ? 4 : 6,
+                    ),
+              decoration: isPlain
+                  ? null
+                  : BoxDecoration(
+                      color: surfaceColor,
+                      borderRadius: BorderRadius.circular(borderRadius),
+                      border: Border.all(
+                        color: enabled
+                            ? borderColor
+                            : borderColor.withValues(alpha: 0.6),
+                      ),
+                    ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -85,7 +94,7 @@ class FlowDropdownCell extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: theme.bodyStyle(
                         context,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: isPlain ? null : FontWeight.w500,
                       ),
                     ),
                   ),

@@ -6,7 +6,7 @@ A beautiful, universal Flutter data table with spreadsheet-style hover UX. Works
 
 - **Universal API** — generic `FlowDataTable<T>` with custom column definitions
 - **Same UI/UX** — hover highlight, subtle scale animation, bordered spreadsheet layout, dark/light theme support
-- **Built-in cell types** — text, avatar+subtitle, status badges, icon+text, dot indicator
+- **Built-in cell types** — text, avatar+subtitle, status badges, icon+text, dot indicator, dropdown
 - **Sorting** — per-column sort with client-side or server-side control
 - **Pagination** — optional footer with page navigation and page-size selector
 - **Row selection** — optional checkbox column with select-all
@@ -61,6 +61,42 @@ FlowDataTable<Product>(
   ],
 )
 ```
+
+### Built-in cells
+
+The library provides a `FlowCells` utility class containing pre-styled cells matching the design system:
+
+* **Text cell**:
+  ```dart
+  FlowCells.text(context, 'Text value')
+  ```
+* **Avatar with Subtitle**:
+  ```dart
+  FlowCells.avatarWithSubtitle(context, title: 'John Doe', subtitle: 'john@example.com')
+  ```
+* **Badge cell**:
+  ```dart
+  FlowCells.badge(context, 'Active')
+  ```
+* **Icon with Text**:
+  ```dart
+  FlowCells.iconWithText(context, icon: LucideIcons.checkCircle, text: '5 done')
+  ```
+* **Dot Indicator with Text**:
+  ```dart
+  FlowCells.dotWithText(context, text: 'Online', isActive: true)
+  ```
+* **Dropdown cell**:
+  An inline editable dropdown cell. Pass `isPlain: true` to display it as a plain text cell with a chevron down icon instead of a styled button pill.
+  ```dart
+  FlowCells.dropdown(
+    context,
+    value: role,
+    options: const ['Admin', 'Member', 'Owner'],
+    isPlain: true, // true for plain cell, false for styled button pill
+    onChanged: (newRole) => setState(() => role = newRole),
+  )
+  ```
 
 ### Custom cells
 
