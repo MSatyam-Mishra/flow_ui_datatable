@@ -36,38 +36,38 @@ class DartSyntaxColors {
   final Color border;
 
   factory DartSyntaxColors.dark() => const DartSyntaxColors(
-        background: Color(0xFF282C34),
-        foreground: Color(0xFFABB2BF),
-        keyword: Color(0xFFC678DD),
-        string: Color(0xFF98C379),
-        number: Color(0xFFD19A66),
-        className: Color(0xFFE6C07B),
-        function: Color(0xFF61AFEF),
-        type: Color(0xFFE6C07B),
-        comment: Color(0xFF5C6370),
-        punctuation: Color(0xFFABB2BF),
-        meta: Color(0xFF61AFEF),
-        variable: Color(0xFFE06C75),
-        gutter: Color(0xFF5C6370),
-        border: Color(0xFF3E4451),
-      );
+    background: Color(0xFF282C34),
+    foreground: Color(0xFFABB2BF),
+    keyword: Color(0xFFC678DD),
+    string: Color(0xFF98C379),
+    number: Color(0xFFD19A66),
+    className: Color(0xFFE6C07B),
+    function: Color(0xFF61AFEF),
+    type: Color(0xFFE6C07B),
+    comment: Color(0xFF5C6370),
+    punctuation: Color(0xFFABB2BF),
+    meta: Color(0xFF61AFEF),
+    variable: Color(0xFFE06C75),
+    gutter: Color(0xFF5C6370),
+    border: Color(0xFF3E4451),
+  );
 
   factory DartSyntaxColors.light() => const DartSyntaxColors(
-        background: Color(0xFFFAFAFA),
-        foreground: Color(0xFF383A42),
-        keyword: Color(0xFFA626A4),
-        string: Color(0xFF50A14F),
-        number: Color(0xFF986801),
-        className: Color(0xFFC18401),
-        function: Color(0xFF4078F2),
-        type: Color(0xFFC18401),
-        comment: Color(0xFFA0A1A7),
-        punctuation: Color(0xFF383A42),
-        meta: Color(0xFF4078F2),
-        variable: Color(0xFFE45649),
-        gutter: Color(0xFF9CA3AF),
-        border: Color(0xFFE1E4E8),
-      );
+    background: Color(0xFFFAFAFA),
+    foreground: Color(0xFF383A42),
+    keyword: Color(0xFFA626A4),
+    string: Color(0xFF50A14F),
+    number: Color(0xFF986801),
+    className: Color(0xFFC18401),
+    function: Color(0xFF4078F2),
+    type: Color(0xFFC18401),
+    comment: Color(0xFFA0A1A7),
+    punctuation: Color(0xFF383A42),
+    meta: Color(0xFF4078F2),
+    variable: Color(0xFFE45649),
+    gutter: Color(0xFF9CA3AF),
+    border: Color(0xFFE1E4E8),
+  );
 
   Color forClass(String? tokenClass) {
     if (tokenClass == null || tokenClass.isEmpty) return foreground;

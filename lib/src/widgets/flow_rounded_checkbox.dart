@@ -23,8 +23,8 @@ class FlowRoundedCheckbox extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final resolvedBorder = borderColor ??
-        (isDark ? Colors.grey[600]! : Colors.grey[400]!);
+    final resolvedBorder =
+        borderColor ?? (isDark ? Colors.grey[600]! : Colors.grey[400]!);
     final resolvedActive = activeColor ?? theme.colorScheme.primary;
 
     return SizedBox(

@@ -216,11 +216,8 @@ class ProductCatalogPreview extends StatelessWidget {
           width: const FlowFlexColumnWidth(2),
           sortable: true,
           sortValue: (p) => p.name,
-          cellBuilder: (context, p, _) => FlowCells.text(
-            context,
-            p.name,
-            fontWeight: FontWeight.w600,
-          ),
+          cellBuilder: (context, p, _) =>
+              FlowCells.text(context, p.name, fontWeight: FontWeight.w600),
         ),
         FlowColumn(
           id: 'category',
@@ -277,11 +274,8 @@ class OrderTrackerPreview extends StatelessWidget {
           label: 'Order ID',
           icon: LucideIcons.receipt,
           width: const FlowFixedColumnWidth(112),
-          cellBuilder: (context, o, _) => FlowCells.text(
-            context,
-            o.id,
-            fontWeight: FontWeight.bold,
-          ),
+          cellBuilder: (context, o, _) =>
+              FlowCells.text(context, o.id, fontWeight: FontWeight.bold),
         ),
         FlowColumn(
           id: 'customer',
@@ -353,11 +347,8 @@ class TaskBoardPreview extends StatelessWidget {
           label: 'Task',
           icon: LucideIcons.clipboardList,
           width: const FlowFlexColumnWidth(2),
-          cellBuilder: (context, t, _) => FlowCells.text(
-            context,
-            t.title,
-            fontWeight: FontWeight.w600,
-          ),
+          cellBuilder: (context, t, _) =>
+              FlowCells.text(context, t.title, fontWeight: FontWeight.w600),
         ),
         FlowColumn(
           id: 'assignee',
@@ -371,11 +362,8 @@ class TaskBoardPreview extends StatelessWidget {
           icon: LucideIcons.flag,
           sortable: true,
           sortValue: (t) => t.priority,
-          cellBuilder: (context, t, _) => FlowCells.badge(
-            context,
-            t.priority,
-            styleMap: priorityStyles,
-          ),
+          cellBuilder: (context, t, _) =>
+              FlowCells.badge(context, t.priority, styleMap: priorityStyles),
         ),
         FlowColumn(
           id: 'status',
@@ -414,8 +402,7 @@ class EmptyStatePreview extends StatelessWidget {
         FlowColumn(
           id: 'name',
           label: 'Name',
-          cellBuilder: (context, user, _) =>
-              FlowCells.text(context, user.name),
+          cellBuilder: (context, user, _) => FlowCells.text(context, user.name),
         ),
         FlowColumn(
           id: 'status',
@@ -429,61 +416,59 @@ class EmptyStatePreview extends StatelessWidget {
 }
 
 FlowColumn<DemoUser> _userInfoColumn() => FlowColumn(
-      id: 'user',
-      label: 'User Info',
-      icon: LucideIcons.user,
-      width: const FlowFlexColumnWidth(2),
-      sortable: true,
-      sortValue: (u) => u.name,
-      cellBuilder: (context, user, _) => FlowCells.avatarWithSubtitle(
-        context,
-        title: user.name,
-        subtitle: user.email,
-      ),
-    );
+  id: 'user',
+  label: 'User Info',
+  icon: LucideIcons.user,
+  width: const FlowFlexColumnWidth(2),
+  sortable: true,
+  sortValue: (u) => u.name,
+  cellBuilder: (context, user, _) => FlowCells.avatarWithSubtitle(
+    context,
+    title: user.name,
+    subtitle: user.email,
+  ),
+);
 
 FlowColumn<DemoUser> _statusColumn() => FlowColumn(
-      id: 'status',
-      label: 'Status',
-      icon: LucideIcons.activity,
-      sortable: true,
-      sortValue: (u) => u.status,
-      cellBuilder: (context, user, _) =>
-          FlowCells.badge(context, user.status),
-    );
+  id: 'status',
+  label: 'Status',
+  icon: LucideIcons.activity,
+  sortable: true,
+  sortValue: (u) => u.status,
+  cellBuilder: (context, user, _) => FlowCells.badge(context, user.status),
+);
 
 List<FlowColumn<DemoUser>> _userColumnsTail() => [
-      FlowColumn(
-        id: 'department',
-        label: 'Department',
-        icon: LucideIcons.briefcase,
-        width: const FlowFlexColumnWidth(1.2),
-        cellBuilder: (context, user, _) =>
-            FlowCells.text(context, user.department),
-      ),
-      FlowColumn(
-        id: 'tasks',
-        label: 'Tasks',
-        icon: LucideIcons.squareCheck,
-        sortable: true,
-        sortValue: (u) => u.tasksCompleted,
-        cellBuilder: (context, user, _) => FlowCells.iconWithText(
-          context,
-          icon: LucideIcons.circleCheck,
-          text: '${user.tasksCompleted} done',
-        ),
-      ),
-      FlowColumn(
-        id: 'lastActive',
-        label: 'Last Active',
-        icon: LucideIcons.clock,
-        cellBuilder: (context, user, _) => FlowCells.dotWithText(
-          context,
-          text: user.lastActive,
-          isActive: user.lastActive == 'Online',
-        ),
-      ),
-    ];
+  FlowColumn(
+    id: 'department',
+    label: 'Department',
+    icon: LucideIcons.briefcase,
+    width: const FlowFlexColumnWidth(1.2),
+    cellBuilder: (context, user, _) => FlowCells.text(context, user.department),
+  ),
+  FlowColumn(
+    id: 'tasks',
+    label: 'Tasks',
+    icon: LucideIcons.squareCheck,
+    sortable: true,
+    sortValue: (u) => u.tasksCompleted,
+    cellBuilder: (context, user, _) => FlowCells.iconWithText(
+      context,
+      icon: LucideIcons.circleCheck,
+      text: '${user.tasksCompleted} done',
+    ),
+  ),
+  FlowColumn(
+    id: 'lastActive',
+    label: 'Last Active',
+    icon: LucideIcons.clock,
+    cellBuilder: (context, user, _) => FlowCells.dotWithText(
+      context,
+      text: user.lastActive,
+      isActive: user.lastActive == 'Online',
+    ),
+  ),
+];
 
 void _snack(BuildContext context, String message) {
   ScaffoldMessenger.of(context).showSnackBar(

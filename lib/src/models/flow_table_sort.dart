@@ -1,8 +1,5 @@
 /// Sort direction for [FlowDataTable].
-enum FlowSortDirection {
-  ascending,
-  descending,
-}
+enum FlowSortDirection { ascending, descending }
 
 /// Current sort state applied to a column.
 class FlowTableSort {
@@ -15,16 +12,13 @@ class FlowTableSort {
   final FlowSortDirection direction;
 
   FlowTableSort toggle() => FlowTableSort(
-        columnId: columnId,
-        direction: direction == FlowSortDirection.ascending
-            ? FlowSortDirection.descending
-            : FlowSortDirection.ascending,
-      );
+    columnId: columnId,
+    direction: direction == FlowSortDirection.ascending
+        ? FlowSortDirection.descending
+        : FlowSortDirection.ascending,
+  );
 
-  FlowTableSort copyWith({
-    String? columnId,
-    FlowSortDirection? direction,
-  }) =>
+  FlowTableSort copyWith({String? columnId, FlowSortDirection? direction}) =>
       FlowTableSort(
         columnId: columnId ?? this.columnId,
         direction: direction ?? this.direction,

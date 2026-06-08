@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'flow_column_width.dart';
 
-typedef FlowCellBuilder<T> = Widget Function(
-  BuildContext context,
-  T row,
-  int rowIndex,
-);
+typedef FlowCellBuilder<T> =
+    Widget Function(BuildContext context, T row, int rowIndex);
 
 typedef FlowComparableGetter<T> = Comparable<dynamic> Function(T row);
 

@@ -56,7 +56,8 @@ class _FlowInteractiveCellState extends State<FlowInteractiveCell> {
       ),
     );
 
-    final hasTap = widget.onTap != null ||
+    final hasTap =
+        widget.onTap != null ||
         widget.onDoubleTap != null ||
         widget.onLongPress != null;
 
@@ -65,10 +66,7 @@ class _FlowInteractiveCellState extends State<FlowInteractiveCell> {
         onTap: widget.onTap,
         onDoubleTap: widget.onDoubleTap,
         onLongPress: widget.onLongPress,
-        child: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: result,
-        ),
+        child: MouseRegion(cursor: SystemMouseCursors.click, child: result),
       );
     }
 

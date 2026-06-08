@@ -11,13 +11,11 @@ import 'flow_rounded_checkbox.dart';
 import 'flow_table_pagination_bar.dart';
 
 typedef FlowRowIdGetter<T> = String Function(T row, int index);
-typedef FlowActionsBuilder<T> = Widget Function(
-  BuildContext context,
-  T row,
-  int index,
-);
+typedef FlowActionsBuilder<T> =
+    Widget Function(BuildContext context, T row, int index);
 typedef FlowRowTapCallback<T> = void Function(T row, int index);
-//test 
+
+//test
 /// Universal, beautifully styled data table for any row type and column layout.
 class FlowDataTable<T> extends StatefulWidget {
   const FlowDataTable({
@@ -199,9 +197,9 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
     if (sort == null || !widget.clientSideSort) return source;
 
     final column = widget.columns.cast<FlowColumn<T>?>().firstWhere(
-          (c) => c!.id == sort.columnId,
-          orElse: () => null,
-        );
+      (c) => c!.id == sort.columnId,
+      orElse: () => null,
+    );
     if (column == null || column.sortValue == null) return source;
 
     final sorted = List<T>.from(source);
@@ -255,12 +253,10 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
 
   void _toggleSelectAll(List<T> visibleRows, int startIndex) {
     final next = Set<String>.from(widget.selectedRowIds);
-    final allSelected = visibleRows.every(
-      (row) {
-        final i = widget.rows.indexOf(row);
-        return next.contains(_rowId(row, i));
-      },
-    );
+    final allSelected = visibleRows.every((row) {
+      final i = widget.rows.indexOf(row);
+      return next.contains(_rowId(row, i));
+    });
 
     if (allSelected) {
       for (var i = 0; i < visibleRows.length; i++) {
@@ -314,7 +310,8 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
     final sorted = _sortedRows(widget.rows);
     final displayRows = _paginatedRows(sorted);
 
-    final computedMinWidth = widget.minTableWidth ??
+    final computedMinWidth =
+        widget.minTableWidth ??
         (widget.columns.length * 140.0 +
             (widget.showRowIndex ? widget.rowIndexWidth : 0) +
             (widget.showActionsColumn ? widget.actionsColumnWidth : 0) +
@@ -367,14 +364,7 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
                 bottom: verticalBorder,
               ),
               defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-              children: [
-                _buildHeaderRow(
-                  context,
-                  theme,
-                  const [],
-                  0,
-                ),
-              ],
+              children: [_buildHeaderRow(context, theme, const [], 0)],
             ),
           ),
           ClipRRect(
@@ -383,15 +373,16 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
             child: Container(
               width: double.infinity,
               color: cellBgColor,
-              child: widget.emptyWidget ??
+              child:
+                  widget.emptyWidget ??
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 32),
                     child: Center(
                       child: Text(
                         'No data available',
-                        style: theme.bodyStyle(context).copyWith(
-                              color: theme.secondaryTextColor(context),
-                            ),
+                        style: theme
+                            .bodyStyle(context)
+                            .copyWith(color: theme.secondaryTextColor(context)),
                       ),
                     ),
                   ),
@@ -478,21 +469,13 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
             ),
             defaultVerticalAlignment: TableCellVerticalAlignment.middle,
             children: [
-              _buildHeaderRow(
-                context,
-                theme,
-                displayRows,
-                paginationStart,
-              ),
+              _buildHeaderRow(context, theme, displayRows, paginationStart),
             ],
           ),
         ),
         bodyTable,
         if (widget.pagination != null)
-          FlowTablePaginationBar(
-            pagination: widget.pagination!,
-            theme: theme,
-          ),
+          FlowTablePaginationBar(pagination: widget.pagination!, theme: theme),
       ],
     );
 
@@ -537,10 +520,7 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
           scrollDirection: Axis.horizontal,
           child: SizedBox(
             width: tableWidth,
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: content,
-            ),
+            child: Align(alignment: Alignment.topLeft, child: content),
           ),
         );
       },
@@ -572,10 +552,10 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
       final bool? headerValue = visibleRows.isEmpty
           ? false
           : selectedCount == 0
-              ? false
-              : selectedCount == visibleRows.length
-                  ? true
-                  : null;
+          ? false
+          : selectedCount == visibleRows.length
+          ? true
+          : null;
 
       cells.add(
         _buildHeaderCell(
@@ -620,7 +600,8 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
           center: column.center,
           tooltip: column.tooltip,
           sortable: column.sortable,
-          sortAscending: isSorted && sort!.direction == FlowSortDirection.ascending,
+          sortAscending:
+              isSorted && sort!.direction == FlowSortDirection.ascending,
           isSorted: isSorted,
           onTap: column.sortable ? () => _handleSort(column) : null,
         ),
@@ -680,7 +661,8 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
     }
 
     if (widget.showRowIndex) {
-      final indexLabel = widget.rowIndexBuilder?.call(row, globalIndex) ??
+      final indexLabel =
+          widget.rowIndexBuilder?.call(row, globalIndex) ??
           '${globalIndex + 1}';
       cells.add(
         FlowInteractiveCell(
@@ -705,8 +687,7 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
         FlowInteractiveCell(
           theme: theme,
           brightness: brightness,
-          alignment:
-              column.center ? Alignment.center : Alignment.centerLeft,
+          alignment: column.center ? Alignment.center : Alignment.centerLeft,
           onTap: rowTap,
           onDoubleTap: widget.onRowDoubleTap == null
               ? null
@@ -725,7 +706,8 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
           theme: theme,
           brightness: brightness,
           alignment: Alignment.center,
-          child: widget.actionsBuilder?.call(context, row, globalIndex) ??
+          child:
+              widget.actionsBuilder?.call(context, row, globalIndex) ??
               Icon(
                 LucideIcons.ellipsis,
                 size: 18,
@@ -752,7 +734,8 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
     VoidCallback? onTap,
     Widget? child,
   }) {
-    Widget content = child ??
+    Widget content =
+        child ??
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -776,8 +759,8 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
               Icon(
                 isSorted
                     ? (sortAscending
-                        ? LucideIcons.arrowUp
-                        : LucideIcons.arrowDown)
+                          ? LucideIcons.arrowUp
+                          : LucideIcons.arrowDown)
                     : LucideIcons.arrowUpDown,
                 size: 12,
                 color: isSorted

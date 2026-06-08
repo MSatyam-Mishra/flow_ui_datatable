@@ -23,9 +23,7 @@ class FlowTablePaginationBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
         color: theme.headerBgColor(context),
-        border: Border(
-          top: BorderSide(color: borderColor),
-        ),
+        border: Border(top: BorderSide(color: borderColor)),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(theme.borderRadius),
           bottomRight: Radius.circular(theme.borderRadius),
@@ -37,7 +35,9 @@ class FlowTablePaginationBar extends StatelessWidget {
             child: Text(
               'Showing ${pagination.startIndex + 1}-${pagination.endIndex} of ${pagination.totalItems}',
               overflow: TextOverflow.ellipsis,
-              style: theme.bodyStyle(context).copyWith(
+              style: theme
+                  .bodyStyle(context)
+                  .copyWith(
                     fontSize: 12,
                     color: theme.secondaryTextColor(context),
                   ),
@@ -63,7 +63,8 @@ class FlowTablePaginationBar extends StatelessWidget {
             icon: LucideIcons.chevronLeft,
             enabled: pagination.hasPrevious,
             onPressed: pagination.hasPrevious
-                ? () => pagination.onPageChanged?.call(pagination.currentPage - 1)
+                ? () =>
+                      pagination.onPageChanged?.call(pagination.currentPage - 1)
                 : null,
             theme: theme,
             isDark: isDark,
@@ -78,7 +79,8 @@ class FlowTablePaginationBar extends StatelessWidget {
             icon: LucideIcons.chevronRight,
             enabled: pagination.hasNext,
             onPressed: pagination.hasNext
-                ? () => pagination.onPageChanged?.call(pagination.currentPage + 1)
+                ? () =>
+                      pagination.onPageChanged?.call(pagination.currentPage + 1)
                 : null,
             theme: theme,
             isDark: isDark,
@@ -118,10 +120,7 @@ class _PageSizeDropdown extends StatelessWidget {
           style: theme.bodyStyle(context).copyWith(fontSize: 12),
           items: options
               .map(
-                (size) => DropdownMenuItem(
-                  value: size,
-                  child: Text('$size'),
-                ),
+                (size) => DropdownMenuItem(value: size, child: Text('$size')),
               )
               .toList(),
           onChanged: (v) {

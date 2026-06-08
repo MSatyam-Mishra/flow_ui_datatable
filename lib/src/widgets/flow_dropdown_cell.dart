@@ -50,7 +50,9 @@ class FlowDropdownCell extends StatelessWidget {
             side: BorderSide(color: borderColor),
           ),
         ),
-        padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 4)),
+        padding: const WidgetStatePropertyAll(
+          EdgeInsets.symmetric(vertical: 4),
+        ),
       ),
       builder: (context, controller, child) {
         return Material(
@@ -144,10 +146,7 @@ class FlowDropdownCell extends StatelessWidget {
                       color: theme.primaryTextColor(context),
                     )
                   : null,
-              child: Text(
-                option,
-                style: theme.bodyStyle(context),
-              ),
+              child: Text(option, style: theme.bodyStyle(context)),
             ),
           )
           .toList(),

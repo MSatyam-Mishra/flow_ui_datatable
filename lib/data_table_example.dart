@@ -453,8 +453,8 @@
 //   @override
 //   Widget build(BuildContext context) {
 //     final isDarkMode = widget.brightness == Brightness.dark;
-//     final hoverColor = isDarkMode 
-//         ? Colors.white.withValues(alpha: 0.06) 
+//     final hoverColor = isDarkMode
+//         ? Colors.white.withValues(alpha: 0.06)
 //         : Colors.black.withValues(alpha: 0.04);
 
 //     Widget result = AnimatedContainer(

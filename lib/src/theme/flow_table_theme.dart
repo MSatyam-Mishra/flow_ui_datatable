@@ -135,11 +135,11 @@ class FlowTableTheme {
   }
 
   TextStyle headerStyle(BuildContext context) => TextStyle(
-        fontFamily: fontFamily,
-        fontSize: headerFontSize,
-        fontWeight: FontWeight.w600,
-        color: headerTextColor(context),
-      );
+    fontFamily: fontFamily,
+    fontSize: headerFontSize,
+    fontWeight: FontWeight.w600,
+    color: headerTextColor(context),
+  );
 
   TextStyle bodyStyle(BuildContext context, {FontWeight? fontWeight}) =>
       TextStyle(
@@ -150,17 +150,17 @@ class FlowTableTheme {
       );
 
   TextStyle subtitleStyle(BuildContext context) => TextStyle(
-        fontFamily: fontFamily,
-        fontSize: subtitleFontSize,
-        color: secondaryTextColor(context),
-      );
+    fontFamily: fontFamily,
+    fontSize: subtitleFontSize,
+    color: secondaryTextColor(context),
+  );
 
   TextStyle indexStyle(BuildContext context) => TextStyle(
-        fontFamily: fontFamily,
-        fontSize: bodyFontSize,
-        color: indexTextColor(context),
-        fontWeight: FontWeight.bold,
-      );
+    fontFamily: fontFamily,
+    fontSize: bodyFontSize,
+    color: indexTextColor(context),
+    fontWeight: FontWeight.bold,
+  );
 
   static const FlowTableTheme defaults = FlowTableTheme();
 }

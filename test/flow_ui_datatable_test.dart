@@ -88,11 +88,7 @@ void main() {
             body: FlowDataTable<_TestRow>(
               rows: List.generate(
                 12,
-                (i) => _TestRow(
-                  id: '$i',
-                  name: 'User $i',
-                  status: 'Active',
-                ),
+                (i) => _TestRow(id: '$i', name: 'User $i', status: 'Active'),
               ),
               pagination: FlowPagination(
                 currentPage: 1,
@@ -121,11 +117,7 @@ void main() {
 }
 
 class _TestRow {
-  const _TestRow({
-    required this.id,
-    required this.name,
-    required this.status,
-  });
+  const _TestRow({required this.id, required this.name, required this.status});
 
   final String id;
   final String name;

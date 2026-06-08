@@ -5,11 +5,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'dart_syntax.dart';
 
 class CodePanel extends StatelessWidget {
-  const CodePanel({
-    super.key,
-    required this.code,
-    this.language = 'dart',
-  });
+  const CodePanel({super.key, required this.code, this.language = 'dart'});
 
   final String code;
   final String language;

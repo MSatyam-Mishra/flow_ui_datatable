@@ -21,10 +21,7 @@ class ShowcaseItem {
 }
 
 class ShowcaseShell extends StatelessWidget {
-  const ShowcaseShell({
-    super.key,
-    required this.item,
-  });
+  const ShowcaseShell({super.key, required this.item});
 
   final ShowcaseItem item;
 
@@ -101,9 +98,7 @@ class ShowcaseShell extends StatelessWidget {
           Expanded(
             child: TabBarView(
               children: [
-                SingleChildScrollView(
-                  child: item.preview,
-                ),
+                SingleChildScrollView(child: item.preview),
                 CodePanel(code: item.code),
               ],
             ),
