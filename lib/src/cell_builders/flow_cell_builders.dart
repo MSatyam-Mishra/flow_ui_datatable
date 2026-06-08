@@ -6,6 +6,7 @@ import '../widgets/flow_avatar.dart';
 import '../widgets/flow_dropdown_cell.dart';
 import '../widgets/flow_status_badge.dart';
 
+//test
 /// Pre-built cell widgets that preserve the original table look and feel.
 abstract final class FlowCells {
   /// Simple text cell.
@@ -54,7 +55,8 @@ abstract final class FlowCells {
               Text(
                 title,
                 overflow: TextOverflow.ellipsis,
-                style: theme.bodyStyle(context, fontWeight: FontWeight.bold)
+                style: theme
+                    .bodyStyle(context, fontWeight: FontWeight.bold)
                     .copyWith(fontSize: 14),
               ),
               const SizedBox(height: 2),
@@ -98,20 +100,15 @@ abstract final class FlowCells {
     final isDark = theme.isDark(context);
     return Row(
       children: [
-        Icon(
-          icon,
-          size: 14,
-          color: iconColor ?? Colors.green[500],
-        ),
+        Icon(icon, size: 14, color: iconColor ?? Colors.green[500]),
         const SizedBox(width: 6),
         Flexible(
           child: Text(
             text,
             overflow: TextOverflow.ellipsis,
-            style: theme.bodyStyle(context, fontWeight: fontWeight ?? FontWeight.w600)
-                .copyWith(
-              color: isDark ? Colors.grey[300] : Colors.grey[700],
-            ),
+            style: theme
+                .bodyStyle(context, fontWeight: fontWeight ?? FontWeight.w600)
+                .copyWith(color: isDark ? Colors.grey[300] : Colors.grey[700]),
           ),
         ),
       ],
