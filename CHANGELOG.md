@@ -1,3 +1,7 @@
+## 0.1.1
+
+* Add `isPlain` parameter to `FlowCells.dropdown` and `FlowDropdownCell` to support borderless dropdown styling.
+
 ## 0.1.0
 
 * Initial release of `FlowDataTable` — universal, beautifully styled data table
