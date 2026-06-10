@@ -43,9 +43,7 @@ class _FlowDataTableDemoAppState extends State<FlowDataTableDemoApp> {
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.indigo,
           brightness: Brightness.light,
-        ).copyWith(
-          surface: Colors.white,
-        ),
+        ).copyWith(surface: Colors.white),
         useMaterial3: true,
         fontFamily: 'Inter',
       ),
@@ -64,9 +62,7 @@ class _FlowDataTableDemoAppState extends State<FlowDataTableDemoApp> {
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.indigo,
           brightness: Brightness.dark,
-        ).copyWith(
-          surface: Colors.black,
-        ),
+        ).copyWith(surface: Colors.black),
         useMaterial3: true,
         fontFamily: 'Inter',
       ),
