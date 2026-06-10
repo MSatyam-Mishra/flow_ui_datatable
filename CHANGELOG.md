@@ -1,3 +1,16 @@
+## 0.1.4
+
+* Update `README.md` preview image source link.
+
+## 0.1.3
+
+* Add preview screenshot `flow_preview.png` to `README.md`.
+
+## 0.1.2
+
+* Add header logo `flow_header.png` to `README.md`.
+* Apply code formatting and clean up gitignored build files.
+
 ## 0.1.1
 
 * Add `isPlain` parameter to `FlowCells.dropdown` and `FlowDropdownCell` to support borderless dropdown styling.
