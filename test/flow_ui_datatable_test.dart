@@ -42,6 +42,33 @@ void main() {
       expect(find.text('Active'), findsOneWidget);
     });
 
+    testWidgets('renders in a pure WidgetsApp without Material ancestor', (
+      tester,
+    ) async {
+      final rows = [_TestRow(id: '1', name: 'Alice', status: 'Active')];
+
+      await tester.pumpWidget(
+        WidgetsApp(
+          color: const Color(0xFFFFFFFF),
+          builder: (context, _) => FlowDataTable<_TestRow>(
+            rows: rows,
+            columns: [
+              FlowColumn(
+                id: 'name',
+                label: 'Name',
+                cellBuilder: (context, row, _) =>
+                    FlowCells.text(context, row.name),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      expect(find.text('Name'), findsOneWidget);
+      expect(find.text('Alice'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
+
     testWidgets('shows empty state when no rows', (tester) async {
       await tester.pumpWidget(
         MaterialApp(

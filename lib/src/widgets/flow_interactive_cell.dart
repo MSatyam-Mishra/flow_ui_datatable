@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../theme/flow_table_theme.dart';
 
@@ -46,7 +46,7 @@ class _FlowInteractiveCellState extends State<FlowInteractiveCell> {
       decoration: BoxDecoration(
         color: _isHovered
             ? hoverColor
-            : (widget.baseBgColor ?? Colors.transparent),
+            : (widget.baseBgColor ?? const Color(0x00000000)),
       ),
       child: AnimatedScale(
         scale: _isHovered ? widget.theme.hoverScale : 1.0,

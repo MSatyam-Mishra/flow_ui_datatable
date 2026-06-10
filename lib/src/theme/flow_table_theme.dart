@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 /// Visual styling for [FlowDataTable]. Defaults match the original spreadsheet UI.
 class FlowTableTheme {
@@ -79,64 +79,64 @@ class FlowTableTheme {
   Color borderColor(BuildContext context) {
     final isDark = this.isDark(context);
     return isDark
-        ? (darkBorderColor ?? Colors.grey[800]!)
-        : (lightBorderColor ?? Colors.grey[300]!);
+        ? (darkBorderColor ?? const Color(0xFF1F2937))
+        : (lightBorderColor ?? const Color(0xFFD1D5DB));
   }
 
   Color headerBgColor(BuildContext context) {
     final isDark = this.isDark(context);
     return isDark
-        ? (darkHeaderBgColor ?? Colors.grey[900]!)
-        : (lightHeaderBgColor ?? Colors.grey[50]!);
+        ? (darkHeaderBgColor ?? const Color(0xFF111827))
+        : (lightHeaderBgColor ?? const Color(0xFFF9FAFB));
   }
 
   Color indexBgColor(BuildContext context) {
     final isDark = this.isDark(context);
     return isDark
-        ? (darkIndexBgColor ?? Colors.grey[900]!)
-        : (lightIndexBgColor ?? Colors.grey[50]!);
+        ? (darkIndexBgColor ?? const Color(0xFF111827))
+        : (lightIndexBgColor ?? const Color(0xFFF9FAFB));
   }
 
   Color cellBgColor(BuildContext context) {
     final isDark = this.isDark(context);
     return isDark
         ? (darkCellBgColor ?? const Color(0xFF0F0F0F))
-        : (lightCellBgColor ?? Colors.white);
+        : (lightCellBgColor ?? const Color(0xFFFFFFFF));
   }
 
   Color hoverOverlay(BuildContext context) {
     final isDark = this.isDark(context);
     return isDark
-        ? (darkHoverOverlay ?? Colors.white.withValues(alpha: 0.06))
-        : (lightHoverOverlay ?? Colors.black.withValues(alpha: 0.04));
+        ? (darkHoverOverlay ?? const Color(0x0FFFFFFF))
+        : (lightHoverOverlay ?? const Color(0x0A000000));
   }
 
   Color headerTextColor(BuildContext context) {
     final isDark = this.isDark(context);
     return isDark
-        ? (darkHeaderTextColor ?? Colors.grey[300]!)
-        : (lightHeaderTextColor ?? Colors.grey[700]!);
+        ? (darkHeaderTextColor ?? const Color(0xFFD1D5DB))
+        : (lightHeaderTextColor ?? const Color(0xFF374151));
   }
 
   Color primaryTextColor(BuildContext context) {
     final isDark = this.isDark(context);
     return isDark
-        ? (darkPrimaryTextColor ?? Colors.grey[100]!)
-        : (lightPrimaryTextColor ?? Colors.grey[900]!);
+        ? (darkPrimaryTextColor ?? const Color(0xFFF3F4F6))
+        : (lightPrimaryTextColor ?? const Color(0xFF111827));
   }
 
   Color secondaryTextColor(BuildContext context) {
     final isDark = this.isDark(context);
     return isDark
-        ? (darkSecondaryTextColor ?? Colors.grey[400]!)
-        : (lightSecondaryTextColor ?? Colors.grey[600]!);
+        ? (darkSecondaryTextColor ?? const Color(0xFF9CA3AF))
+        : (lightSecondaryTextColor ?? const Color(0xFF4B5563));
   }
 
   Color indexTextColor(BuildContext context) {
     final isDark = this.isDark(context);
     return isDark
-        ? (darkIndexTextColor ?? Colors.grey[400]!)
-        : (lightIndexTextColor ?? Colors.grey[600]!);
+        ? (darkIndexTextColor ?? const Color(0xFF9CA3AF))
+        : (lightIndexTextColor ?? const Color(0xFF4B5563));
   }
 
   TextStyle headerStyle(BuildContext context) => TextStyle(

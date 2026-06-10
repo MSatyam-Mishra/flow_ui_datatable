@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../theme/flow_table_theme.dart';
 
@@ -39,26 +39,26 @@ class FlowStatusBadge extends StatelessWidget {
       case 'online':
       case 'success':
         return FlowBadgeStyle(
-          backgroundColor: Colors.green.withValues(alpha: 0.15),
-          textColor: Colors.green[700]!,
+          backgroundColor: const Color(0x2610B981), // green with 0.15 opacity
+          textColor: const Color(0xFF047857), // green[700]
         );
       case 'pending':
       case 'warning':
         return FlowBadgeStyle(
-          backgroundColor: Colors.orange.withValues(alpha: 0.15),
-          textColor: Colors.orange[700]!,
+          backgroundColor: const Color(0x26F59E0B), // orange with 0.15 opacity
+          textColor: const Color(0xFFB45309), // orange[700]
         );
       case 'inactive':
       case 'offline':
       case 'error':
         return FlowBadgeStyle(
-          backgroundColor: Colors.grey.withValues(alpha: 0.15),
-          textColor: Colors.grey[700]!,
+          backgroundColor: const Color(0x269CA3AF), // grey with 0.15 opacity
+          textColor: const Color(0xFF374151), // grey[700]
         );
       default:
         return FlowBadgeStyle(
-          backgroundColor: Colors.blue.withValues(alpha: 0.15),
-          textColor: Colors.blue[700]!,
+          backgroundColor: const Color(0x263B82F6), // blue with 0.15 opacity
+          textColor: const Color(0xFF1D4ED8), // blue[700]
         );
     }
   }

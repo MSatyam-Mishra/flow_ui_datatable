@@ -1,6 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 /// Lightweight avatar with initials — used by [FlowCells.avatarWithSubtitle].
+///
+/// Implemented using standard [Container] and [BoxDecoration] widgets to remove
+/// dependencies on the Material library's CircleAvatar.
 class FlowAvatar extends StatelessWidget {
   const FlowAvatar({
     super.key,
@@ -43,20 +46,32 @@ class FlowAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bg = backgroundColor ?? _colorFromName(name);
-    final fg = foregroundColor ?? Colors.white;
+    final fg = foregroundColor ?? const Color(0xFFFFFFFF);
+    final size = radius * 2;
 
     if (imageUrl != null && imageUrl!.isNotEmpty) {
-      return CircleAvatar(
-        radius: radius,
-        backgroundImage: NetworkImage(imageUrl!),
-        onBackgroundImageError: (_, _) {},
-        child: null,
+      return Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            image: NetworkImage(imageUrl!),
+            fit: BoxFit.cover,
+            onError: (_, __) {},
+          ),
+        ),
       );
     }
 
-    return CircleAvatar(
-      radius: radius,
-      backgroundColor: bg,
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: bg,
+        shape: BoxShape.circle,
+      ),
+      alignment: Alignment.center,
       child: Text(
         _initials,
         style: TextStyle(

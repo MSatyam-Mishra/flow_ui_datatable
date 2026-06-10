@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../theme/flow_table_theme.dart';
@@ -6,8 +6,9 @@ import '../widgets/flow_avatar.dart';
 import '../widgets/flow_dropdown_cell.dart';
 import '../widgets/flow_status_badge.dart';
 
-//test
 /// Pre-built cell widgets that preserve the original table look and feel.
+///
+/// Refactored to operate independently of the Material library.
 abstract final class FlowCells {
   /// Simple text cell.
   static Widget text(
@@ -100,15 +101,15 @@ abstract final class FlowCells {
     final isDark = theme.isDark(context);
     return Row(
       children: [
-        Icon(icon, size: 14, color: iconColor ?? Colors.green[500]),
+        Icon(icon, size: 14, color: iconColor ?? const Color(0xFF10B981)),
         const SizedBox(width: 6),
         Flexible(
           child: Text(
             text,
             overflow: TextOverflow.ellipsis,
             style: theme
-                .bodyStyle(context, fontWeight: fontWeight ?? FontWeight.w600)
-                .copyWith(color: isDark ? Colors.grey[300] : Colors.grey[700]),
+                .bodyStyle(context, fontWeight: FontWeight.bold)
+                .copyWith(color: isDark ? const Color(0xFFD1D5DB) : const Color(0xFF374151)),
           ),
         ),
       ],
@@ -131,8 +132,8 @@ abstract final class FlowCells {
           height: 6,
           decoration: BoxDecoration(
             color: isActive
-                ? (activeColor ?? Colors.green)
-                : (inactiveColor ?? Colors.grey),
+                ? (activeColor ?? const Color(0xFF10B981))
+                : (inactiveColor ?? const Color(0xFF9CA3AF)),
             shape: BoxShape.circle,
           ),
         ),
@@ -177,11 +178,18 @@ abstract final class FlowCells {
     IconData icon = LucideIcons.ellipsis,
     double iconSize = 18,
   }) {
-    return IconButton(
-      icon: Icon(icon, size: iconSize),
-      padding: EdgeInsets.zero,
-      constraints: const BoxConstraints(),
-      onPressed: onPressed,
+    return MouseRegion(
+      cursor: onPressed != null ? SystemMouseCursors.click : SystemMouseCursors.basic,
+      child: GestureDetector(
+        onTap: onPressed,
+        child: Container(
+          width: 32,
+          height: 32,
+          alignment: Alignment.center,
+          color: const Color(0x00000000),
+          child: Icon(icon, size: iconSize),
+        ),
+      ),
     );
   }
 }

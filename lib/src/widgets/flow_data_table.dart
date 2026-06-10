@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../models/flow_column.dart';
@@ -329,7 +329,7 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
           widget.loadingWidget ??
               SizedBox(
                 height: theme.rowHeight * 4,
-                child: const Center(child: CircularProgressIndicator()),
+                child: const Center(child: _SimpleProgressIndicator()),
               ),
         ),
       );
@@ -743,7 +743,7 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
               Icon(
                 icon,
                 size: 14,
-                color: isDark ? Colors.grey[400] : Colors.grey[600],
+                color: isDark ? const Color(0xFF9CA3AF) : const Color(0xFF4B5563),
               ),
               const SizedBox(width: 6),
             ],
@@ -765,14 +765,14 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
                 size: 12,
                 color: isSorted
                     ? theme.primaryTextColor(context)
-                    : (isDark ? Colors.grey[600] : Colors.grey[400]),
+                    : (isDark ? const Color(0xFF4B5563) : const Color(0xFF9CA3AF)),
               ),
             ],
           ],
         );
 
     if (tooltip != null) {
-      content = Tooltip(message: tooltip, child: content);
+      content = FlowTooltip(message: tooltip, child: content);
     }
 
     final cell = Container(
@@ -790,5 +790,133 @@ class _FlowDataTableState<T> extends State<FlowDataTable<T>> {
     }
 
     return cell;
+  }
+}
+
+class _SimpleProgressIndicator extends StatefulWidget {
+  const _SimpleProgressIndicator();
+
+  @override
+  State<_SimpleProgressIndicator> createState() => _SimpleProgressIndicatorState();
+}
+
+class _SimpleProgressIndicatorState extends State<_SimpleProgressIndicator>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RotationTransition(
+      turns: _controller,
+      child: CustomPaint(
+        size: const Size(24, 24),
+        painter: _SpinnerPainter(),
+      ),
+    );
+  }
+}
+
+class _SpinnerPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = const Color(0xFF4F46E5) // Indigo 600
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.5
+      ..strokeCap = StrokeCap.round;
+
+    final rect = Rect.fromLTWH(0, 0, size.width, size.height);
+    canvas.drawArc(rect, 0.0, 4.71, false, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
+}
+
+class FlowTooltip extends StatefulWidget {
+  const FlowTooltip({super.key, required this.message, required this.child});
+
+  final String message;
+  final Widget child;
+
+  @override
+  State<FlowTooltip> createState() => _FlowTooltipState();
+}
+
+class _FlowTooltipState extends State<FlowTooltip> {
+  final LayerLink _layerLink = LayerLink();
+  OverlayEntry? _overlayEntry;
+
+  void _showTooltip() {
+    if (_overlayEntry != null) return;
+
+    final overlay = Overlay.of(context);
+    _overlayEntry = OverlayEntry(
+      builder: (context) {
+        return Positioned(
+          child: CompositedTransformFollower(
+            link: _layerLink,
+            targetAnchor: Alignment.bottomCenter,
+            followerAnchor: Alignment.topCenter,
+            offset: const Offset(0, 4),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: const Color(0xFF1F2937), // Gray 800
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Text(
+                widget.message,
+                style: const TextStyle(
+                  color: Color(0xFFFFFFFF),
+                  fontSize: 11,
+                  fontFamily: 'Inter',
+                  decoration: TextDecoration.none,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+    overlay.insert(_overlayEntry!);
+  }
+
+  void _hideTooltip() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
+
+  @override
+  void dispose() {
+    _hideTooltip();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CompositedTransformTarget(
+      link: _layerLink,
+      child: MouseRegion(
+        onEnter: (_) => _showTooltip(),
+        onExit: (_) => _hideTooltip(),
+        child: widget.child,
+      ),
+    );
   }
 }
