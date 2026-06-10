@@ -5,6 +5,26 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../data/demo_data.dart';
 import '../widgets/table_empty_state.dart';
 
+const cleanFlowTableTheme = FlowTableTheme(
+  lightBorderColor: Color(0xFFE5E7EB),
+  lightHeaderBgColor: Color(0xFFFAFAFA),
+  lightIndexBgColor: Color(0xFFFAFAFA),
+  lightCellBgColor: Color(0xFFFFFFFF),
+  lightHeaderTextColor: Color(0xFF4B5563),
+  lightPrimaryTextColor: Color(0xFF111827),
+  lightSecondaryTextColor: Color(0xFF6B7280),
+  lightHoverOverlay: Color(0x06000000),
+
+  darkBorderColor: Color(0xFF1F1F1F),
+  darkHeaderBgColor: Color(0xFF0D0D0D),
+  darkIndexBgColor: Color(0xFF0D0D0D),
+  darkCellBgColor: Color(0xFF000000),
+  darkHeaderTextColor: Color(0xFF9CA3AF),
+  darkPrimaryTextColor: Color(0xFFF3F4F6),
+  darkSecondaryTextColor: Color(0xFF6B7280),
+  darkHoverOverlay: Color(0x0AFFFFFF),
+);
+
 class TeamDirectoryPreview extends StatefulWidget {
   const TeamDirectoryPreview({super.key});
 
@@ -25,6 +45,7 @@ class _TeamDirectoryPreviewState extends State<TeamDirectoryPreview> {
   @override
   Widget build(BuildContext context) {
     return FlowDataTable<DemoUser>(
+      theme: cleanFlowTableTheme,
       rows: demoUsers,
       minTableWidth: 1200,
       showRowIndex: true,
@@ -83,6 +104,7 @@ class MinimalTablePreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlowDataTable<DemoUser>(
+      theme: cleanFlowTableTheme,
       rows: demoUsers,
       minTableWidth: 720,
       columns: [
@@ -138,6 +160,7 @@ class _LargeDatasetPreviewState extends State<LargeDatasetPreview> {
   @override
   Widget build(BuildContext context) {
     return FlowDataTable<DemoUser>(
+      theme: cleanFlowTableTheme,
       rows: largeUserDataset,
       minTableWidth: 1000,
       showRowIndex: true,
@@ -197,6 +220,7 @@ class ProductCatalogPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlowDataTable<DemoProduct>(
+      theme: cleanFlowTableTheme,
       rows: demoProducts,
       minTableWidth: 960,
       showRowIndex: true,
@@ -266,6 +290,7 @@ class OrderTrackerPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlowDataTable<DemoOrder>(
+      theme: cleanFlowTableTheme,
       rows: demoOrders,
       minTableWidth: 950,
       columns: [
@@ -338,6 +363,7 @@ class TaskBoardPreview extends StatelessWidget {
     };
 
     return FlowDataTable<DemoTask>(
+      theme: cleanFlowTableTheme,
       rows: demoTasks,
       minTableWidth: 850,
       showRowIndex: true,
@@ -391,6 +417,7 @@ class EmptyStatePreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlowDataTable<DemoUser>(
+      theme: cleanFlowTableTheme,
       rows: const [],
       minTableWidth: 640,
       emptyWidget: const TableEmptyState(
@@ -728,6 +755,7 @@ class _TransactionsPreviewState extends State<TransactionsPreview> {
           ),
           clipBehavior: Clip.antiAlias,
           child: FlowDataTable<DemoTransaction>(
+            theme: cleanFlowTableTheme,
             rows: filtered,
             minTableWidth: 950,
             selectable: true,
