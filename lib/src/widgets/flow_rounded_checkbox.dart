@@ -1,6 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 /// Rounded checkbox used by [FlowDataTable] selection column.
+///
+/// Implemented using basic widgets ([AnimatedContainer] and [CustomPaint])
+/// to allow use in environments without a Material Design ancestor.
 class FlowRoundedCheckbox extends StatelessWidget {
   const FlowRoundedCheckbox({
     super.key,
@@ -21,43 +24,97 @@ class FlowRoundedCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final resolvedBorder =
-        borderColor ?? (isDark ? Colors.grey[600]! : Colors.grey[400]!);
-    final resolvedActive = activeColor ?? theme.colorScheme.primary;
+    final isSelected = value == true;
+    final isIndeterminate = value == null;
+    final hasOnChanged = onChanged != null;
 
-    return SizedBox(
+    final resolvedBorder = borderColor ?? const Color(0xFF9CA3AF); // grey[400]
+    final resolvedActive = activeColor ?? const Color(0xFF4F46E5); // Indigo 600
+
+    Widget inner;
+    if (isSelected) {
+      inner = CustomPaint(
+        size: Size(size * 0.6, size * 0.6),
+        painter: _CheckPainter(color: const Color(0xFFFFFFFF), isIndeterminate: false),
+      );
+    } else if (isIndeterminate) {
+      inner = CustomPaint(
+        size: Size(size * 0.6, size * 0.6),
+        painter: _CheckPainter(color: const Color(0xFFFFFFFF), isIndeterminate: true),
+      );
+    } else {
+      inner = const SizedBox();
+    }
+
+    final box = AnimatedContainer(
+      duration: const Duration(milliseconds: 150),
       width: size,
       height: size,
-      child: Checkbox(
-        value: value,
-        onChanged: onChanged,
-        tristate: true,
-        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        visualDensity: VisualDensity.compact,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
+      decoration: BoxDecoration(
+        color: (isSelected || isIndeterminate) ? resolvedActive : const Color(0x00000000),
+        border: Border.all(
+          color: (isSelected || isIndeterminate) ? resolvedActive : resolvedBorder,
+          width: 1.5,
         ),
-        side: WidgetStateBorderSide.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
-            return BorderSide(color: resolvedActive, width: 1.5);
-          }
-          if (states.contains(WidgetState.disabled)) {
-            return BorderSide(
-              color: resolvedBorder.withValues(alpha: 0.5),
-              width: 1.5,
-            );
-          }
-          return BorderSide(color: resolvedBorder, width: 1.5);
-        }),
-        fillColor: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
-            return resolvedActive;
-          }
-          return Colors.transparent;
-        }),
+        borderRadius: BorderRadius.circular(borderRadius),
+      ),
+      alignment: Alignment.center,
+      child: inner,
+    );
+
+    if (!hasOnChanged) {
+      return box;
+    }
+
+    return GestureDetector(
+      onTap: () {
+        if (value == null || value == false) {
+          onChanged!(true);
+        } else {
+          onChanged!(false);
+        }
+      },
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: box,
       ),
     );
+  }
+}
+
+class _CheckPainter extends CustomPainter {
+  const _CheckPainter({required this.color, required this.isIndeterminate});
+
+  final Color color;
+  final bool isIndeterminate;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.0
+      ..strokeCap = StrokeCap.round;
+
+    if (isIndeterminate) {
+      // Draw a horizontal line in the middle
+      canvas.drawLine(
+        Offset(size.width * 0.2, size.height * 0.5),
+        Offset(size.width * 0.8, size.height * 0.5),
+        paint,
+      );
+    } else {
+      // Draw a checkmark
+      final path = Path()
+        ..moveTo(size.width * 0.15, size.height * 0.45)
+        ..lineTo(size.width * 0.42, size.height * 0.72)
+        ..lineTo(size.width * 0.85, size.height * 0.22);
+      canvas.drawPath(path, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _CheckPainter oldDelegate) {
+    return oldDelegate.color != color || oldDelegate.isIndeterminate != isIndeterminate;
   }
 }

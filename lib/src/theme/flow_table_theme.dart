@@ -65,8 +65,13 @@ class FlowTableTheme {
   final Color? lightIndexTextColor;
   final Color? darkIndexTextColor;
 
-  bool isDark(BuildContext context) =>
-      Theme.of(context).brightness == Brightness.dark;
+  bool isDark(BuildContext context) {
+    final mediaQuery = MediaQuery.maybeOf(context);
+    if (mediaQuery != null) {
+      return mediaQuery.platformBrightness == Brightness.dark;
+    }
+    return false;
+  }
 
   Brightness brightness(BuildContext context) =>
       isDark(context) ? Brightness.dark : Brightness.light;
