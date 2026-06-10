@@ -1,14 +1,10 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/MSatyam-Mishra/flow_ui_datatable/main/assets/flow_header.png" alt="Flow UI Logo" width="100%" />
-</p>
+![Flow UI Logo](https://raw.githubusercontent.com/MSatyam-Mishra/flow_ui_datatable/main/assets/flow_header.png)
 
 # flow_ui_datatable
 
 A beautiful, universal Flutter data table with spreadsheet-style hover UX. Works with **any** row type and **any** column layout while keeping a polished, production-ready look.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/MSatyam-Mishra/flow_ui_datatable/main/assets/flow_preview.png" alt="Flow UI Datatable Preview" width="100%" />
-</p>
+![Flow UI Datatable Preview](https://raw.githubusercontent.com/MSatyam-Mishra/flow_ui_datatable/main/assets/flow_preview.png)
 
 ## Features
 
