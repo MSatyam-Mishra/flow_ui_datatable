@@ -341,3 +341,119 @@ final demoTasks = [
     dueDate: '2024-06-20',
   ),
 ];
+
+class DemoTransaction {
+  const DemoTransaction({
+    required this.id,
+    required this.name,
+    required this.logoUrl,
+    required this.type,
+    required this.category,
+    required this.amount,
+    required this.date,
+    required this.isIncome,
+  });
+
+  final String id;
+  final String name;
+  final String logoUrl;
+  final String type;
+  final String category;
+  final double amount;
+  final String date;
+  final bool isIncome;
+}
+
+final demoTransactions = [
+  const DemoTransaction(
+    id: 'TXN-001',
+    name: 'Netflix',
+    logoUrl: 'https://images.unsplash.com/photo-1574375927938-d5a98e8edd85?w=60&auto=format&fit=crop',
+    type: 'Payment',
+    category: 'Subscription',
+    amount: -25.00,
+    date: '15 Aug 2024, 12:00 AM',
+    isIncome: false,
+  ),
+  const DemoTransaction(
+    id: 'TXN-002',
+    name: 'Spotify',
+    logoUrl: 'https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=60&auto=format&fit=crop',
+    type: 'Payment',
+    category: 'Subscription',
+    amount: -9.99,
+    date: '15 Aug 2024, 12:00 AM',
+    isIncome: false,
+  ),
+  const DemoTransaction(
+    id: 'TXN-003',
+    name: 'Kristin Watson',
+    logoUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&auto=format&fit=crop',
+    type: 'Withdrawal',
+    category: 'Cash',
+    amount: -500.00,
+    date: '10 Aug 2024, 10:12 AM',
+    isIncome: false,
+  ),
+  const DemoTransaction(
+    id: 'TXN-004',
+    name: 'Guy Hawkins',
+    logoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&auto=format&fit=crop',
+    type: 'Transfer',
+    category: 'Transfer',
+    amount: -250.00,
+    date: '10 Aug 2024, 08:20 AM',
+    isIncome: false,
+  ),
+  const DemoTransaction(
+    id: 'TXN-005',
+    name: 'Upwork',
+    logoUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=60&auto=format&fit=crop',
+    type: 'Request',
+    category: 'Salary',
+    amount: 1250.00,
+    date: '09 Aug 2024, 08:00 PM',
+    isIncome: true,
+  ),
+  const DemoTransaction(
+    id: 'TXN-006',
+    name: 'Robert Fox',
+    logoUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&auto=format&fit=crop',
+    type: 'Transfer',
+    category: 'Transfer',
+    amount: -120.00,
+    date: '08 Aug 2024, 02:30 PM',
+    isIncome: false,
+  ),
+  const DemoTransaction(
+    id: 'TXN-007',
+    name: 'Jenny Wilson',
+    logoUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&auto=format&fit=crop',
+    type: 'Request',
+    category: 'Salary',
+    amount: 450.00,
+    date: '07 Aug 2024, 09:15 PM',
+    isIncome: true,
+  ),
+  const DemoTransaction(
+    id: 'TXN-008',
+    name: 'Starbucks',
+    logoUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=60&auto=format&fit=crop',
+    type: 'Payment',
+    category: 'Food',
+    amount: -6.75,
+    date: '06 Aug 2024, 08:45 AM',
+    isIncome: false,
+  ),
+  const DemoTransaction(
+    id: 'TXN-009',
+    name: 'Amazon',
+    logoUrl: 'https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?w=60&auto=format&fit=crop',
+    type: 'Payment',
+    category: 'Shopping',
+    amount: -187.30,
+    date: '05 Aug 2024, 03:22 PM',
+    isIncome: false,
+  ),
+];
+

@@ -302,3 +302,73 @@ FlowDataTable<DemoUser>(
     ),
   ],
 )''';
+
+const transactionsCode = '''
+FlowDataTable<DemoTransaction>(
+  rows: filteredTransactions,
+  minTableWidth: 950,
+  selectable: true,
+  selectedRowIds: selectedIds,
+  onSelectionChanged: (ids) => setState(() => selectedIds = ids),
+  rowIdGetter: (txn, _) => txn.id,
+  columns: [
+    FlowColumn(
+      id: 'name',
+      label: 'Name',
+      icon: LucideIcons.user,
+      width: const FlowFlexColumnWidth(2),
+      sortable: true,
+      sortValue: (t) => t.name,
+      cellBuilder: (context, txn, _) => Row(
+        children: [
+          Container(
+            width: 32,
+            height: 32,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: NetworkImage(txn.logoUrl),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Text(txn.name, style: const TextStyle(fontWeight: FontWeight.bold)),
+        ],
+      ),
+    ),
+    FlowColumn(
+      id: 'type',
+      label: 'Type',
+      icon: LucideIcons.arrowUpDown,
+      cellBuilder: (context, txn, _) => FlowCells.text(context, txn.type),
+    ),
+    FlowColumn(
+      id: 'category',
+      label: 'Category',
+      icon: LucideIcons.tag,
+      cellBuilder: (context, txn, _) => FlowCells.badge(context, txn.category),
+    ),
+    FlowColumn(
+      id: 'amount',
+      label: 'Amount',
+      icon: LucideIcons.dollarSign,
+      sortable: true,
+      sortValue: (t) => t.amount,
+      cellBuilder: (context, txn, _) => Text(
+        '\${txn.amount > 0 ? "+" : ""}\\\$\${txn.amount.abs().toStringAsFixed(2)}',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: txn.amount > 0 ? const Color(0xFF10B981) : null,
+        ),
+      ),
+    ),
+    FlowColumn(
+      id: 'date',
+      label: 'Date',
+      icon: LucideIcons.calendar,
+      cellBuilder: (context, txn, _) => FlowCells.text(context, txn.date),
+    ),
+  ],
+)''';
+

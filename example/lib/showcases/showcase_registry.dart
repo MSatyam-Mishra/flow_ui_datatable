@@ -6,6 +6,15 @@ import 'showcase_previews.dart';
 
 final showcaseItems = [
   ShowcaseItem(
+    id: 'transactions',
+    title: 'Transactions',
+    description:
+        'Beautiful transactions list with custom badges, amounts, and logos.',
+    icon: LucideIcons.arrowUpDown,
+    preview: const TransactionsPreview(),
+    code: transactionsCode,
+  ),
+  ShowcaseItem(
     id: 'team',
     title: 'Team Directory',
     description:
