@@ -1,6 +1,10 @@
-## 0.1.6
+## 0.1.7
 
 * Update README image paths to use updated filenames to bypass pub.dev image cache 404 issue.
+
+## 0.1.6
+
+* Internal version bump.
 
 ## 0.1.5
 
