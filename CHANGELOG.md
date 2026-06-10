@@ -1,3 +1,11 @@
+## 0.1.6
+
+* Update README image paths to use updated filenames to bypass pub.dev image cache 404 issue.
+
+## 0.1.5
+
+* Switch README image tags from HTML markup to standard Markdown.
+
 ## 0.1.4
 
 * Update `README.md` preview image source link.
