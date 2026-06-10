@@ -6,6 +6,10 @@
 
 A beautiful, universal Flutter data table with spreadsheet-style hover UX. Works with **any** row type and **any** column layout while keeping a polished, production-ready look.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/MSatyam-Mishra/flow_ui_datatable/main/assets/flow_preview.png" alt="Flow UI Datatable Preview" width="100%" />
+</p>
+
 ## Features
 
 - **Universal API** — generic `FlowDataTable<T>` with custom column definitions
