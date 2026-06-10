@@ -276,9 +276,11 @@ void main() {
     // Write Antigravity rules
     if (toolChoice == 2 || toolChoice == 5) {
       final dir = isGlobal
-          ? Directory('$baseDir/.gemini/antigravity-ide/skills/flow_ui_datatable')
+          ? Directory(
+              '$baseDir/.gemini/antigravity-ide/skills/flow_ui_datatable',
+            )
           : Directory('$baseDir/.gemini/skills/flow_ui_datatable');
-      
+
       if (!dir.existsSync()) dir.createSync(recursive: true);
       final file = File('${dir.path}/SKILL.md');
       _writeFile(file, skillsMarkdown);
@@ -286,7 +288,9 @@ void main() {
 
       // Also write to .gemini/config/skills if global
       if (isGlobal) {
-        final configDir = Directory('$baseDir/.gemini/config/skills/flow_ui_datatable');
+        final configDir = Directory(
+          '$baseDir/.gemini/config/skills/flow_ui_datatable',
+        );
         if (!configDir.existsSync()) configDir.createSync(recursive: true);
         final configFile = File('${configDir.path}/SKILL.md');
         _writeFile(configFile, skillsMarkdown);
