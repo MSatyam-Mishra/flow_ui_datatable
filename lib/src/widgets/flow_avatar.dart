@@ -58,7 +58,7 @@ class FlowAvatar extends StatelessWidget {
           image: DecorationImage(
             image: NetworkImage(imageUrl!),
             fit: BoxFit.cover,
-            onError: (_, __) {},
+            onError: (exception, stackTrace) {},
           ),
         ),
       );

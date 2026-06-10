@@ -1,186 +1,6 @@
-![Flow UI Logo](https://raw.githubusercontent.com/MSatyam-Mishra/flow_ui_datatable/main/assets/flow_header_v1.png)
+import 'dart:io';
 
-# flow_ui_datatable
-
-A beautiful, universal Flutter data table with spreadsheet-style hover UX. Works with **any** row type and **any** column layout while keeping a polished, production-ready look.
-
-![Flow UI Datatable Preview](https://raw.githubusercontent.com/MSatyam-Mishra/flow_ui_datatable/main/assets/flow_preview_v1.png)
-
-## Features
-
-- **Universal API** — generic `FlowDataTable<T>` with custom column definitions
-- **Same UI/UX** — hover highlight, subtle scale animation, bordered spreadsheet layout, dark/light theme support
-- **Built-in cell types** — text, avatar+subtitle, status badges, icon+text, dot indicator, dropdown
-- **Sorting** — per-column sort with client-side or server-side control
-- **Pagination** — optional footer with page navigation and page-size selector
-- **Row selection** — optional checkbox column with select-all
-- **Row index** — optional `#` column
-- **Actions column** — optional trailing actions per row
-- **Loading & empty states**
-- **Horizontal scroll** — for wide tables
-- **Fully themeable** — `FlowTableTheme` for colors, sizes, fonts
-
-## Getting started
-
-Add to `pubspec.yaml`:
-
-```yaml
-dependencies:
-  flow_ui_datatable: ^0.1.0
-```
-
-## Usage
-
-```dart
-import 'package:flow_ui_datatable/flow_ui_datatable.dart';
-import 'package:lucide_icons_flutter/lucide_icons.dart';
-
-FlowDataTable<Product>(
-  rows: products,
-  showRowIndex: true,
-  selectable: true,
-  selectedRowIds: selectedIds,
-  onSelectionChanged: (ids) => setState(() => selectedIds = ids),
-  rowIdGetter: (product, _) => product.id,
-  showActionsColumn: true,
-  actionsBuilder: (context, product, index) => FlowCells.actionsButton(
-    onPressed: () => _onAction(product),
-  ),
-  columns: [
-    FlowColumn(
-      id: 'name',
-      label: 'Product',
-      icon: LucideIcons.package,
-      width: const FlowFlexColumnWidth(2),
-      sortable: true,
-      sortValue: (p) => p.name,
-      cellBuilder: (context, product, _) => FlowCells.text(context, product.name),
-    ),
-    FlowColumn(
-      id: 'status',
-      label: 'Status',
-      icon: LucideIcons.activity,
-      cellBuilder: (context, product, _) => FlowCells.badge(context, product.status),
-    ),
-  ],
-)
-```
-
-### Built-in cells
-
-The library provides a `FlowCells` utility class containing pre-styled cells matching the design system:
-
-* **Text cell**:
-  ```dart
-  FlowCells.text(context, 'Text value')
-  ```
-* **Avatar with Subtitle**:
-  ```dart
-  FlowCells.avatarWithSubtitle(context, title: 'John Doe', subtitle: 'john@example.com')
-  ```
-* **Badge cell**:
-  ```dart
-  FlowCells.badge(context, 'Active')
-  ```
-* **Icon with Text**:
-  ```dart
-  FlowCells.iconWithText(context, icon: LucideIcons.checkCircle, text: '5 done')
-  ```
-* **Dot Indicator with Text**:
-  ```dart
-  FlowCells.dotWithText(context, text: 'Online', isActive: true)
-  ```
-* **Dropdown cell**:
-  An inline editable dropdown cell. Pass `isPlain: true` to display it as a plain text cell with a chevron down icon instead of a styled button pill.
-  ```dart
-  FlowCells.dropdown(
-    context,
-    value: role,
-    options: const ['Admin', 'Member', 'Owner'],
-    isPlain: true, // true for plain cell, false for styled button pill
-    onChanged: (newRole) => setState(() => role = newRole),
-  )
-  ```
-
-### Custom cells
-
-Use any widget in `cellBuilder`:
-
-```dart
-FlowColumn(
-  id: 'custom',
-  label: 'Custom',
-  cellBuilder: (context, row, index) => MyCustomWidget(data: row),
-)
-```
-
-### Pagination
-
-```dart
-pagination: FlowPagination(
-  currentPage: page,
-  pageSize: 25,
-  totalItems: totalCount,
-  onPageChanged: (p) => setState(() => page = p),
-  onPageSizeChanged: (size) => setState(() => pageSize = size),
-),
-```
-
-### Theming
-
-```dart
-FlowDataTable<T>(
-  theme: const FlowTableTheme(
-    fontFamily: 'Inter',
-    borderRadius: 8,
-    rowHeight: 56,
-  ),
-  // ...
-)
-```
-
-## Example
-
-Live demo: [flowui.lol](https://www.flowui.lol)
-
-See the [`example/`](example/) folder for a full demo reproducing the original user-management table.
-
-```bash
-cd example
-flutter run
-```
-
-## AI Assistant Setup (skills.md)
-
-You can install `skills.md` rules into your workspace to help AI coding assistants (like Claude, Cursor, GitHub Copilot, Roo Code, or Antigravity) understand the `flow_ui_datatable` library specifications and design rules.
-
-### Command-line Installation (Recommended)
-
-Run the interactive CLI installer to automatically install the rules for your favorite AI tools:
-
-```bash
-dart run flow_ui_datatable:install_skills
-```
-
-The installer will ask:
-* Which AI tools to install rules for (Cursor `.cursorrules`, Antigravity `.gemini/skills/`, Copilot `.github/copilot-instructions.md`, Cline/Roo Code `.clinerules`, or All).
-* Whether to install them globally (User profile folder) or locally for the current project.
-
----
-
-### Manual Setup
-
-If you prefer to install it manually, copy the text in the box below and create the rules file for your tool:
-* **Cursor**: Create `.cursorrules` in your project root.
-* **Cline / Roo Code**: Create `.clinerules` in your project root.
-* **GitHub Copilot**: Create `.github/copilot-instructions.md` in your project root.
-* **Antigravity**: Create `.gemini/skills/flow_ui_datatable/SKILL.md` in your project root.
-
-<details>
-<summary><b>Click to show manual rules.md content</b></summary>
-
-```markdown
----
+const String skillsMarkdown = r'''---
 name: flow_ui_datatable
 description: Guidelines and instructions for creating beautiful, theme-compliant, and Material-free data tables using the flow_ui_datatable package.
 ---
@@ -384,11 +204,108 @@ List<User> _getMockUsers() => [
   User('3', 'Charlie', true),
 ];
 ```
-```
+''';
 
-</details>
+void main() {
+  stdout.writeln('====================================================');
+  stdout.writeln('      FlowDataTable AI Assistant Skill Installer      ');
+  stdout.writeln('====================================================');
 
-## License
+  // 1. Prompt for targeted tool
+  stdout.writeln('\nWhich IDE/AI Tool rules would you like to install?');
+  stdout.writeln('  1: Cursor (.cursorrules)');
+  stdout.writeln('  2: Antigravity (.gemini/skills/)');
+  stdout.writeln('  3: Copilot/Codex (.github/copilot-instructions.md)');
+  stdout.writeln('  4: Cline/Roo Code (.clinerules)');
+  stdout.writeln('  5: All of the above [Default]');
+  stdout.write('Select option [1-5]: ');
+  final toolInput = stdin.readLineSync()?.trim() ?? '';
+  final toolChoice = toolInput.isEmpty ? 5 : int.tryParse(toolInput) ?? 5;
 
-See [LICENSE](LICENSE).
+  // 2. Prompt for scope
+  stdout.writeln('\nWhere would you like to install the skill?');
+  stdout.writeln('  1: Global (User profile directory) [Default]');
+  stdout.writeln('  2: Project-Local (Current directory)');
+  stdout.write('Select option [1-2]: ');
+  final scopeInput = stdin.readLineSync()?.trim() ?? '';
+  final scopeChoice = scopeInput.isEmpty ? 1 : int.tryParse(scopeInput) ?? 1;
 
+  final isGlobal = scopeChoice == 1;
+
+  // Resolve base directory path
+  String baseDir;
+  if (isGlobal) {
+    final home = Platform.isWindows
+        ? Platform.environment['USERPROFILE']
+        : Platform.environment['HOME'];
+    if (home == null) {
+      stderr.writeln('Error: Could not resolve home directory.');
+      exit(1);
+    }
+    baseDir = home;
+  } else {
+    baseDir = Directory.current.path;
+  }
+
+  final paths = <String>[];
+
+  try {
+    // Write Cursor rules
+    if (toolChoice == 1 || toolChoice == 5) {
+      final file = File('$baseDir/.cursorrules');
+      _writeFile(file, skillsMarkdown);
+      paths.add(file.path);
+    }
+
+    // Write Copilot / Codex rules
+    if (toolChoice == 3 || toolChoice == 5) {
+      final dir = Directory('$baseDir/.github');
+      if (!dir.existsSync()) dir.createSync(recursive: true);
+      final file = File('${dir.path}/copilot-instructions.md');
+      _writeFile(file, skillsMarkdown);
+      paths.add(file.path);
+    }
+
+    // Write Cline / Roo Code rules
+    if (toolChoice == 4 || toolChoice == 5) {
+      final file = File('$baseDir/.clinerules');
+      _writeFile(file, skillsMarkdown);
+      paths.add(file.path);
+    }
+
+    // Write Antigravity rules
+    if (toolChoice == 2 || toolChoice == 5) {
+      final dir = isGlobal
+          ? Directory('$baseDir/.gemini/antigravity-ide/skills/flow_ui_datatable')
+          : Directory('$baseDir/.gemini/skills/flow_ui_datatable');
+      
+      if (!dir.existsSync()) dir.createSync(recursive: true);
+      final file = File('${dir.path}/SKILL.md');
+      _writeFile(file, skillsMarkdown);
+      paths.add(file.path);
+
+      // Also write to .gemini/config/skills if global
+      if (isGlobal) {
+        final configDir = Directory('$baseDir/.gemini/config/skills/flow_ui_datatable');
+        if (!configDir.existsSync()) configDir.createSync(recursive: true);
+        final configFile = File('${configDir.path}/SKILL.md');
+        _writeFile(configFile, skillsMarkdown);
+        paths.add(configFile.path);
+      }
+    }
+
+    stdout.writeln('\n[SUCCESS] AI skills successfully installed at:');
+    for (final path in paths) {
+      stdout.writeln('  - $path');
+    }
+    stdout.writeln('\nHappy coding with flow_ui_datatable!');
+  } catch (e) {
+    stderr.writeln('Error installing skills: $e');
+    exit(1);
+  }
+}
+
+void _writeFile(File file, String content) {
+  // If file exists, merge or overwrite. We overwrite to keep rules clean.
+  file.writeAsStringSync(content);
+}

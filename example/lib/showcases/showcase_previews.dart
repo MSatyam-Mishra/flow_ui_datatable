@@ -796,7 +796,7 @@ class _TransactionsPreviewState extends State<TransactionsPreview> {
                         image: DecorationImage(
                           image: NetworkImage(txn.logoUrl),
                           fit: BoxFit.cover,
-                          onError: (_, __) {},
+                          onError: (exception, stackTrace) {},
                         ),
                       ),
                     ),
@@ -907,6 +907,7 @@ class _TransactionsPreviewState extends State<TransactionsPreview> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
+              // ignore: deprecated_member_use
               color: iconColor.withOpacity(0.1),
               shape: BoxShape.circle,
             ),

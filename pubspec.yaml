@@ -4,6 +4,10 @@ version: 0.2.0
 homepage: https://www.flowui.lol
 repository: https://github.com/MSatyam-Mishra/flow_ui_datatable
 
+executables:
+  install_skills: install_skills
+
+
 environment:
   sdk: ^3.12.0
   flutter: ">=1.17.0"

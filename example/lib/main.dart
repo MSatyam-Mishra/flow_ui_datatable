@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
-import 'data/demo_data.dart';
 import 'showcases/showcase_registry.dart';
 import 'widgets/code_panel.dart';
 
@@ -25,7 +24,6 @@ class _FlowDataTableDemoAppState extends State<FlowDataTableDemoApp> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = _themeMode == ThemeMode.dark;
     final activeItem = _getActiveSidebarItem();
     final activeShowcase = showcaseItems[activeItem.showcaseIndex];
 
@@ -305,6 +303,7 @@ class _FlowDataTableDemoAppState extends State<FlowDataTableDemoApp> {
             color: isSelected ? activeBg : Colors.transparent,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
+              // ignore: deprecated_member_use
               color: isSelected ? activeText.withOpacity(0.3) : Colors.transparent,
             ),
           ),
@@ -649,6 +648,7 @@ class _FlowDataTableDemoAppState extends State<FlowDataTableDemoApp> {
           border: Border(left: BorderSide(color: borderColor)),
           boxShadow: [
             BoxShadow(
+              // ignore: deprecated_member_use
               color: Colors.black.withOpacity(isDark ? 0.4 : 0.1),
               blurRadius: 10,
               offset: const Offset(-4, 0),
