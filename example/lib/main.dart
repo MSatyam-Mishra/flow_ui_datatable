@@ -30,15 +30,42 @@ class _FlowDataTableDemoAppState extends State<FlowDataTableDemoApp> {
       themeMode: _themeMode,
       theme: ThemeData(
         brightness: Brightness.light,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.transparent,
+          elevation: 0,
+        ),
+        navigationRailTheme: const NavigationRailThemeData(
+          backgroundColor: Colors.white,
+          elevation: 0,
+        ),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.indigo,
+          brightness: Brightness.light,
+        ).copyWith(
+          surface: Colors.white,
+        ),
         useMaterial3: true,
         fontFamily: 'Inter',
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
+        scaffoldBackgroundColor: Colors.black,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black,
+          surfaceTintColor: Colors.transparent,
+          elevation: 0,
+        ),
+        navigationRailTheme: const NavigationRailThemeData(
+          backgroundColor: Colors.black,
+          elevation: 0,
+        ),
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.indigo,
           brightness: Brightness.dark,
+        ).copyWith(
+          surface: Colors.black,
         ),
         useMaterial3: true,
         fontFamily: 'Inter',

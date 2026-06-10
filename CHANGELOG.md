@@ -1,3 +1,7 @@
+## 0.1.8
+
+* Update homepage and add live demo link to README.
+
 ## 0.1.7
 
 * Update README image paths to use updated filenames to bypass pub.dev image cache 404 issue.

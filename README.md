@@ -141,6 +141,8 @@ FlowDataTable<T>(
 
 ## Example
 
+Live demo: [flowui.lol](https://www.flowui.lol)
+
 See the [`example/`](example/) folder for a full demo reproducing the original user-management table.
 
 ```bash
