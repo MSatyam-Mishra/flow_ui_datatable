@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/flow_header.png" alt="Flow UI Logo" width="100%" />
+  <img src="https://raw.githubusercontent.com/MSatyam-Mishra/flow_ui_datatable/main/assets/flow_header.png" alt="Flow UI Logo" width="100%" />
 </p>
 
 # flow_ui_datatable
