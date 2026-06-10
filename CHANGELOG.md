@@ -1,6 +1,18 @@
+## 0.1.10
+
+* Fix auto-brightness theme toggle detection in `FlowTableTheme`.
+* Refactor example application to match the Growin premium transactions dashboard theme.
+* Delete unused commented-out file `data_table_example.dart` to completely purge Material residues.
+* Add unit test for compatibility verification in pure `WidgetsApp` layouts.
+
+## 0.1.9
+
+* Remove Material design library dependencies from package library components to support pure `WidgetsApp` or `CupertinoApp` environments.
+
 ## 0.1.8
 
 * Update homepage and add live demo link to README.
+
 
 ## 0.1.7
 
