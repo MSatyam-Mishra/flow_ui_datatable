@@ -1,6 +1,6 @@
 name: flow_ui_datatable
 description: A beautiful, universal Flutter data table with spreadsheet-style hover UX, sorting, pagination, and selection.
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/MSatyam-Mishra/flow_ui_datatable
 repository: https://github.com/MSatyam-Mishra/flow_ui_datatable
 
