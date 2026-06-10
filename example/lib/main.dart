@@ -31,6 +31,8 @@ class _FlowDataTableDemoAppState extends State<FlowDataTableDemoApp> {
       theme: ThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
+        cardColor: Colors.white,
+        canvasColor: Colors.white,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.transparent,
@@ -40,16 +42,27 @@ class _FlowDataTableDemoAppState extends State<FlowDataTableDemoApp> {
           backgroundColor: Colors.white,
           elevation: 0,
         ),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.indigo,
-          brightness: Brightness.light,
-        ).copyWith(surface: Colors.white),
+        colorScheme: const ColorScheme.light(
+          primary: Colors.indigo,
+          secondary: Colors.indigoAccent,
+          surface: Colors.white,
+          background: Colors.white,
+          surfaceVariant: Color(0xFFF3F4F6), // Gray 100
+          onSurface: Color(0xFF111827), // Gray 900
+          onSurfaceVariant: Color(0xFF4B5563), // Gray 600
+          primaryContainer: Color(0xFFEEF2FF), // Indigo 50
+          onPrimaryContainer: Color(0xFF3730A3), // Indigo 800
+          secondaryContainer: Color(0xFFF3F4F6), // Gray 100
+          onSecondaryContainer: Color(0xFF1F2937), // Gray 800
+        ),
         useMaterial3: true,
         fontFamily: 'Inter',
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.black,
+        cardColor: Colors.black,
+        canvasColor: Colors.black,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.black,
           surfaceTintColor: Colors.transparent,
@@ -59,10 +72,19 @@ class _FlowDataTableDemoAppState extends State<FlowDataTableDemoApp> {
           backgroundColor: Colors.black,
           elevation: 0,
         ),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.indigo,
-          brightness: Brightness.dark,
-        ).copyWith(surface: Colors.black),
+        colorScheme: const ColorScheme.dark(
+          primary: Colors.indigoAccent,
+          secondary: Colors.indigo,
+          surface: Colors.black,
+          background: Colors.black,
+          surfaceVariant: Color(0xFF1F2937), // Gray 800
+          onSurface: Color(0xFFF9FAFB), // Gray 50
+          onSurfaceVariant: Color(0xFF9CA3AF), // Gray 400
+          primaryContainer: Color(0xFF1E1B4B), // Indigo 950
+          onPrimaryContainer: Color(0xFFE0E7FF), // Indigo 100
+          secondaryContainer: Color(0xFF1F2937), // Gray 800
+          onSecondaryContainer: Color(0xFFF3F4F6), // Gray 100
+        ),
         useMaterial3: true,
         fontFamily: 'Inter',
       ),
