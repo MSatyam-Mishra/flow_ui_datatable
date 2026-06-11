@@ -1,3 +1,17 @@
+## 0.2.1
+
+* Add `skills.md` containing AI assistant rules & guidelines for developing with `flow_ui_datatable`.
+* Add a new CLI tool script (`bin/install_skills.dart`) to easily install rules/skills in local and global environments.
+* Register the `install_skills` command-line executable in `pubspec.yaml`.
+* Update `README.md` to document the new AI instructions and CLI installation commands.
+* Fix Dart static analysis warnings and errors:
+  * Standardize image loading error handlers in `FlowAvatar` and showcases by changing `onError: (_, __) {}` to `onError: (exception, stackTrace) {}`.
+  * Fix code style deprecation warnings for color opacity changes in the example application.
+
+## 0.2.0
+
+* Introduce a cleaner, theme-compliant default `FlowTableTheme` config (`cleanFlowTableTheme`) and apply it across all demo showcase tables to ensure high visual quality and compliance.
+
 ## 0.1.10
 
 * Fix auto-brightness theme toggle detection in `FlowTableTheme`.
