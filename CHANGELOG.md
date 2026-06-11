@@ -1,3 +1,7 @@
+## 0.2.3
+
+* Update `README.md` to replace logo image.
+
 ## 0.2.2
 
 * Add `skills.md` containing AI assistant rules & guidelines for developing with `flow_ui_datatable`.
