@@ -150,7 +150,7 @@ cd example
 flutter run
 ```
 
-## AI Assistant Setup (skills.md)
+## AI Code Assistant Setup (skills.md)
 
 You can install `skills.md` rules into your workspace to help AI coding assistants (like Claude, Cursor, GitHub Copilot, Roo Code, or Antigravity) understand the `flow_ui_datatable` library specifications and design rules.
 

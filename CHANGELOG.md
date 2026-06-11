@@ -1,9 +1,12 @@
-## 0.2.1
+## 0.2.2
 
 * Add `skills.md` containing AI assistant rules & guidelines for developing with `flow_ui_datatable`.
 * Add a new CLI tool script (`bin/install_skills.dart`) to easily install rules/skills in local and global environments.
 * Register the `install_skills` command-line executable in `pubspec.yaml`.
 * Update `README.md` to document the new AI instructions and CLI installation commands.
+
+## 0.2.1
+
 * Fix Dart static analysis warnings and errors:
   * Standardize image loading error handlers in `FlowAvatar` and showcases by changing `onError: (_, __) {}` to `onError: (exception, stackTrace) {}`.
   * Fix code style deprecation warnings for color opacity changes in the example application.
